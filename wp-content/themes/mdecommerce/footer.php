@@ -60,16 +60,15 @@
 
                     <div class="col-12 col-md-4">
                         <h5 class="footer-brand">Manh Dung Sports</h5>
-                        <p class="footer-desc small mb-2">
-                            Shop cầu lông chính hãng
-                        </p>
+                        <a class="footer-desc d-block small text-decoration-none mb-2">Địa chỉ vòng xuyến Văn Giang Ecopark</a>
+                        <a class="footer-desc d-block small text-decoration-none mb-2">Mã số DN 0901190162</a>
+                        <a class="footer-desc d-block small text-decoration-none mb-2">Người đại diện Đỗ Sơn Tùng</a>
                         <img
                             src="<?php echo get_template_directory_uri(); ?>/assets/img/bct.png"
                             class="bct-img mb-2 w-25"
                         />
-                        <a class="footer-desc d-block small text-decoration-none mb-2">Mã số DN 0901190162</a>
-                        <a class="footer-desc d-block small text-decoration-none">Người đại diện Đỗ Sơn Tùng</a>
                     </div>
+
 
                     <div class="col-12 col-md-3">
                         <h6 class="footer-title">Liên kết</h6>
@@ -79,9 +78,9 @@
                     </div>
 
                     <div class="col-12 col-md-3">
-                        <h6 class="footer-title">Hỗ trợ</h6>
-                        <a class="footer-link d-block small mb-2" href="https://manhdungsports.store/chinh-sach-bao-hanh-vot-cau-long-yonex/" >Bảo hành vợt Yonex</a>
-                        <a class="footer-link d-block small mb-2" href="https://manhdungsports.store/chinh-sach-bao-hanh-vot-cau-long-li-ning/" >Bảo hành vợt lining</a>
+                        <h6 class="footer-title">Bảo hành</h6>
+                        <a class="footer-link d-block small mb-2" href="https://manhdungsports.store/chinh-sach-bao-hanh-vot-cau-long-yonex/" >Vợt Yonex</a>
+                        <a class="footer-link d-block small mb-2" href="https://manhdungsports.store/chinh-sach-bao-hanh-vot-cau-long-li-ning/" >Vợt Lining</a>
                     </div>
 
                     <div class="col-12 col-md-2">
@@ -108,7 +107,7 @@
 
                 <hr class="footer-divider my-4" />
 
-                <div class="small text-center text-md-start">
+                <div class="small">
                     © 2026 Manh Dung Sports
                 </div>
 
