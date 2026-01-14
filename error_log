@@ -1,0 +1,1 @@
+[14-Jan-2026 11:54:26 UTC] Lỗi hủy lịch sự kiện Cron cho hook: wc_admin_process_orders_milestone, Mã lỗi: could_not_set, Thông báo lỗi: Không thể lưu danh sách sự kiện cron., Dữ liệu: {"schedule":"hourly","args":[],"interval":3600}
