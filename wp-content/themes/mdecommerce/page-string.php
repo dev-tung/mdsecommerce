@@ -48,7 +48,7 @@ $query = new WP_Query($args);
 
 .product-title{
     color:#111;
-    font-size:0.95rem;
+    font-size:0.8rem;
     line-height:1.4;
     text-decoration:none;
 }
@@ -58,7 +58,7 @@ $query = new WP_Query($args);
 
 .product-price{
     color:#111;
-    font-size:0.95rem;
+    font-size:0.8rem;
     white-space:nowrap;
 }
 
@@ -70,7 +70,7 @@ $query = new WP_Query($args);
 
 @media (max-width:576px){
     .product-wrapper > h1{
-        font-size:1.1rem;
+        font-size: 1.1rem;
     }
 }
 </style>
