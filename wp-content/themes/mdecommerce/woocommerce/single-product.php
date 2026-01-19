@@ -86,9 +86,9 @@ if ( ! $product ) return;
   <div class="row gx-2">
 
     <!-- =====================
-         IMAGE SECTION (9/12)
+         IMAGE SECTION (8/12)
     ====================== -->
-    <div class="col-lg-9">
+    <div class="col-lg-8">
       <div class="row g-2">
 
         <?php
@@ -128,9 +128,9 @@ if ( ! $product ) return;
     </div>
 
     <!-- =====================
-         INFO SECTION (3/12)
+         INFO SECTION (4/12)
     ====================== -->
-    <div class="col-lg-3 mt-4 mt-lg-0">
+    <div class="col-lg-4 mt-4 mt-lg-0">
       <div class="position-sticky py-4 px-4 bg-white product-info-scroll">
 
         <!-- CATEGORY -->
