@@ -108,7 +108,7 @@ if ( ! $product ) return;
         </p>
 
         <!-- TITLE -->
-        <h1 class="fw-bold mb-3">
+        <h1 class="fw-bold mb-3 fs-4">
           <?php the_title(); ?>
         </h1>
 
@@ -118,16 +118,17 @@ if ( ! $product ) return;
         </p>
 
         <!-- SHORT DESCRIPTION -->
-        <?php if ( $product->get_short_description() ) : ?>
-          <div class="text-muted mb-4">
+        <?php if ( $product->get_description() ) : ?>
+          <div class="text-muted mb-4 small">
             <?php
             echo apply_filters(
-              'woocommerce_short_description',
-              $product->get_short_description()
+              'the_content',
+              $product->get_description()
             );
             ?>
           </div>
         <?php endif; ?>
+
 
       </div>
     </div>
