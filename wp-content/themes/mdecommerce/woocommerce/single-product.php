@@ -108,12 +108,12 @@ if ( ! $product ) return;
         </p>
 
         <!-- TITLE -->
-        <h1 class="fw-bold mb-3 fs-4">
+        <h1 class="fw-bold mb-3 fs-3">
           <?php the_title(); ?>
         </h1>
 
         <!-- PRICE -->
-        <p class="fw-bold fs-5 mb-4">
+        <p class="fs-5 mb-4 text-danger fw-bold">
           <?php echo $product->get_price_html(); ?>
         </p>
 
