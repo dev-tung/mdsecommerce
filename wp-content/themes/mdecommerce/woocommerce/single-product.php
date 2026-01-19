@@ -96,7 +96,7 @@ if ( ! $product ) return;
          INFO SECTION (3/12)
     ====================== -->
     <div class="col-lg-3 mt-4 mt-lg-0">
-      <div class="position-sticky py-4 px-4 bg-white" style="top:80px;">
+      <div class="position-sticky py-4 px-4 bg-white" style="top:80px; height: 100vh;">
 
         <!-- CATEGORY -->
         <p class="text-uppercase fw-semibold small mb-2">
