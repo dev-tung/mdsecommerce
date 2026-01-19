@@ -45,6 +45,41 @@ if ( ! $product ) return;
     position: static !important;
   }
 }
+
+.product-info-scroll{
+  top:80px; 
+  height: 100vh; 
+  overflow-y: auto;
+}
+
+/* =====================
+   PRODUCT INFO SCROLLBAR
+====================== */
+
+/* Chrome, Edge, Safari */
+.product-info-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.product-info-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.product-info-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.25);
+  border-radius: 10px;
+}
+
+.product-info-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0,0,0,0.45);
+}
+
+/* Firefox */
+.product-info-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0.35) transparent;
+}
+
 </style>
 
 <div class="container-fluid p-lg-4 p-2">
@@ -96,7 +131,7 @@ if ( ! $product ) return;
          INFO SECTION (3/12)
     ====================== -->
     <div class="col-lg-3 mt-4 mt-lg-0">
-      <div class="position-sticky py-4 px-4 bg-white" style="top:80px; height: 100vh; overflow-y: auto;">
+      <div class="position-sticky py-4 px-4 bg-white product-info-scroll">
 
         <!-- CATEGORY -->
         <p class="text-uppercase fw-semibold small mb-2">
