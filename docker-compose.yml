@@ -1,0 +1,42 @@
+
+
+services:
+  php-app:
+    image: php:8.2-apache
+    container_name: php-mdsecommerce
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker-config/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+    command: >
+      bash -c "
+        docker-php-ext-install mysqli pdo pdo_mysql &&
+        a2enmod rewrite &&
+        apache2-foreground
+      "
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.0
+    container_name: mysql-db-mdsecommerce
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mdecommerce
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wppass
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

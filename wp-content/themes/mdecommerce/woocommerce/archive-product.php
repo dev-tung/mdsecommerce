@@ -229,7 +229,7 @@ $image = has_post_thumbnail()
             <?php endif; ?>
 
             <a href="<?= esc_url(get_permalink()); ?>" class="btn btn-buy btn-sm w-100 mt-auto">
-                Mua ngay
+                Xem chi tiết
             </a>
         </div>
     </div>

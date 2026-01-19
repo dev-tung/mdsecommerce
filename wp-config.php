@@ -20,16 +20,16 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'jsglguudhosting_mdecommerce' );
+define( 'DB_NAME', 'mdecommerce' );
 
 /** Database username */
-define( 'DB_USER', 'jsglguudhosting_mdecommerce' );
+define( 'DB_USER', 'wpuser' );
 
 /** Database password */
-define( 'DB_PASSWORD', '8|i$9jNoy9RJEVL' );
+define( 'DB_PASSWORD', 'wppass' );
 
 /** Database hostname */
-define( 'DB_HOST', 'localhost' );
+define( 'DB_HOST', 'db' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8mb4' );
