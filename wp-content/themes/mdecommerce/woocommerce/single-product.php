@@ -138,15 +138,6 @@ if ( ! $product ) return;
     <div class="col-lg-4 mt-4 mt-lg-0">
       <div class="position-sticky py-4 px-4 bg-white product-info-scroll">
 
-        <!-- CATEGORY -->
-        <p class="text-uppercase fw-semibold small mb-2">
-          <?php
-          echo wp_strip_all_tags(
-            wc_get_product_category_list( $product->get_id() )
-          );
-          ?>
-        </p>
-
         <!-- TITLE -->
         <h1 class="fw-bold mb-3">
           <?php the_title(); ?>
