@@ -143,7 +143,7 @@ if ( ! $product ) return;
         </p>
 
         <!-- TITLE -->
-        <h1 class="fw-bold mb-3 fs-3">
+        <h1 class="fw-bold mb-3">
           <?php the_title(); ?>
         </h1>
 
