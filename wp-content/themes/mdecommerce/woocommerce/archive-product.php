@@ -17,7 +17,6 @@
     height:200px;
     width:100%;
     object-fit:cover;
-    border-radius:0;
 }
 .card-body h6{
     font-size:14px;
@@ -54,32 +53,18 @@
     display:grid;
     grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
     gap:16px;
-    width:100%;
-    overflow:hidden;
 }
 
 /* ================= SIDEBAR ================= */
-aside .bg-white{
-    border-radius:0!important;
-}
+aside .bg-white{border-radius:0;}
 aside .list-group-item{
     border:none;
     cursor:pointer;
     padding:8px 10px;
-    border-radius:0;
 }
 aside .list-group-item.active{
     background:#69A84F;
     color:#fff;
-}
-
-/* FIX BO GÓC LIST-GROUP */
-.list-group,
-.list-group-item,
-.list-group-item:first-child,
-.list-group-item:last-child,
-.list-group-item.active{
-    border-radius:0 !important;
 }
 
 /* ================= FILTER BAR ================= */
@@ -90,46 +75,39 @@ aside .list-group-item.active{
 }
 
 /* ================= MOBILE ================= */
-@media(max-width:768px){
-    html,body{
-        overflow-x:hidden;
-    }
-
-    .container{
-        padding-left:12px;
-        padding-right:12px;
-    }
-
-    aside{order:2;}
-    .col-md-9{order:1;}
+@media (max-width:768px){
+    html,body{overflow-x:hidden;}
+    .container{padding:0 12px;}
+    aside{display:none;}
     .product-img{height:160px;}
 
     .filter-bar{
+        display:flex;
         flex-wrap:wrap;
-        gap:10px;
-    }
-    .filter-bar input,
-    .filter-bar select{
-        flex:1 1 100%;
-        min-width:0;
-    }
-}
-
-/* Ẩn sidebar trên mobile */
-@media (max-width:768px){
-    .sidebar-desktop{display:none;}
-}
-
-/* ================= MOBILE GRID: 2 CỘT – KHÔNG TRÀN ================= */
-@media (max-width:768px){
-    #productGrid{
-        grid-template-columns:repeat(2, minmax(0, 1fr));
-        gap:10px;
+        gap:8px;
     }
 
-    .product-item{
+    #searchInput{
+        flex:0 0 100%;
         width:100%;
-        min-width:0;
+    }
+
+    #mobileCategory{
+        flex:0 0 100%;
+        width:100%;
+    }
+
+    /* FIX CHẮC CHẮN GIÁ + SẮP XẾP 1 HÀNG */
+    #priceDropdown,
+    #sortSelect{
+        flex:0 0 calc(50% - 4px);
+        width:calc(50% - 4px);
+        min-width:0 !important;
+    }
+
+    #productGrid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:10px;
     }
 }
 </style>
@@ -138,19 +116,15 @@ aside .list-group-item.active{
 <div class="container">
 <div class="row g-4">
 
-<!-- ================= SIDEBAR ================= -->
-<aside class="col-md-3 sidebar-desktop">
+<!-- ========== SIDEBAR DESKTOP ========== -->
+<aside class="col-md-3">
 <div class="bg-white p-3 shadow-sm">
     <h6 class="fw-bold mb-3">Danh mục</h6>
     <ul class="list-group" id="categoryFilter">
         <li class="list-group-item active" data-category="all">Tất cả</li>
         <?php
-        $terms = get_terms([
-            'taxonomy'   => 'product_cat',
-            'hide_empty' => true,
-        ]);
-
-        if($terms && !is_wp_error($terms)):
+        $terms = get_terms(['taxonomy'=>'product_cat','hide_empty'=>true]);
+        if($terms):
             foreach($terms as $t):
                 if(in_array($t->slug,['uncategorized','cuoc-cuon','cuoc-vi'])) continue;
         ?>
@@ -162,68 +136,67 @@ aside .list-group-item.active{
 </div>
 </aside>
 
-<!-- ================= PRODUCTS ================= -->
+<!-- ========== PRODUCTS ========== -->
 <div class="col-md-9">
 
-<div class="d-flex align-items-center mb-3 gap-3 filter-bar">
-    <input id="searchInput" class="form-control w-100" placeholder="Tìm theo sản phẩm...">
+<div class="filter-bar mb-3">
+    <input id="searchInput" class="form-control" placeholder="Tìm theo sản phẩm...">
 
-    <select id="sortSelect" class="form-select w-auto">
-        <option value="">Sắp xếp</option>
-        <option value="price-asc">Giá thấp → cao</option>
-        <option value="price-desc">Giá cao → thấp</option>
+    <!-- MOBILE CATEGORY -->
+    <select id="mobileCategory" class="form-select d-md-none">
+        <option value="all">Tất cả danh mục</option>
+        <?php
+        if($terms):
+            foreach($terms as $t):
+                if(in_array($t->slug,['uncategorized','cuoc-cuon','cuoc-vi'])) continue;
+        ?>
+        <option value="<?= esc_attr($t->slug); ?>">
+            <?= esc_html($t->name); ?>
+        </option>
+        <?php endforeach; endif; ?>
     </select>
 
-    <select id="priceDropdown" class="form-select w-auto">
+    <select id="priceDropdown" class="form-select">
         <option value="">Tất cả giá</option>
         <option value="0-1000000">Dưới 1 triệu</option>
         <option value="1000000-2000000">1 - 2 triệu</option>
         <option value="2000000-3000000">2 - 3 triệu</option>
         <option value="3000000-10000000">Trên 3 triệu</option>
     </select>
+
+    <select id="sortSelect" class="form-select">
+        <option value="">Sắp xếp</option>
+        <option value="price-asc">Giá thấp → cao</option>
+        <option value="price-desc">Giá cao → thấp</option>
+    </select>
 </div>
 
 <div id="productGrid">
 <?php
-$q = new WP_Query([
-    'post_type'      => 'product',
-    'posts_per_page' => -1,
-    'post_status'    => 'publish',
-    'tax_query'      => [[
-        'taxonomy' => 'product_cat',
-        'field'    => 'slug',
-        'terms'    => ['cuoc-cuon','cuoc-vi'],
-        'operator' => 'NOT IN'
-    ]]
-]);
-
+$q = new WP_Query(['post_type'=>'product','posts_per_page'=>-1,'post_status'=>'publish']);
 while($q->have_posts()): $q->the_post();
 global $product;
 if(!$product) continue;
 
-$regular = (int)$product->get_regular_price();
-$sale    = (int)$product->get_sale_price();
-$price   = $sale ?: $regular;
+$regular=(int)$product->get_regular_price();
+$sale=(int)$product->get_sale_price();
+$price=$sale?:$regular;
 
-$terms = get_the_terms(get_the_ID(),'product_cat');
-$slugs = [];
+$terms=get_the_terms(get_the_ID(),'product_cat');
+$slugs=[];
 if($terms){
     foreach($terms as $t){
         if(!in_array($t->slug,['uncategorized','cuoc-cuon','cuoc-vi'])){
-            $slugs[] = $t->slug;
+            $slugs[]=$t->slug;
         }
     }
 }
-
-$image = has_post_thumbnail()
-    ? get_the_post_thumbnail_url(get_the_ID(),'medium')
-    : wc_placeholder_img_src();
+$image=has_post_thumbnail()?get_the_post_thumbnail_url(get_the_ID(),'medium'):wc_placeholder_img_src();
 ?>
 
 <div class="product-item"
      data-category="<?= esc_attr(implode('|',$slugs)); ?>"
      data-price="<?= esc_attr($price); ?>">
-
     <div class="card h-100">
         <img src="<?= esc_url($image); ?>" class="product-img">
         <div class="card-body text-center d-flex flex-column">
@@ -236,7 +209,7 @@ $image = has_post_thumbnail()
                 <div class="price-sale mb-2"><?= wc_price($regular); ?></div>
             <?php endif; ?>
 
-            <a href="<?= esc_url(get_permalink()); ?>" class="btn btn-buy btn-sm w-100 mt-auto">
+            <a href="<?= esc_url(get_permalink()); ?>" class="btn btn-buy btn-sm mt-auto w-100">
                 Xem chi tiết
             </a>
         </div>
@@ -258,23 +231,27 @@ const grid=document.getElementById('productGrid');
 const cats=document.querySelectorAll('#categoryFilter li');
 const search=document.getElementById('searchInput');
 const sort=document.getElementById('sortSelect');
-const priceDropdown=document.getElementById('priceDropdown');
+const price=document.getElementById('priceDropdown');
+const mobileCat=document.getElementById('mobileCategory');
 
 function applyFilter(){
-    const active=document.querySelector('#categoryFilter .active').dataset.category;
-    const key=search.value.toLowerCase();
-
-    let min=0,max=10000000;
-    if(priceDropdown.value){
-        [min,max]=priceDropdown.value.split('-').map(Number);
+    let active='all';
+    if(window.innerWidth<=768 && mobileCat){
+        active=mobileCat.value;
+    }else{
+        active=document.querySelector('#categoryFilter .active').dataset.category;
     }
 
+    const key=search.value.toLowerCase();
+    let min=0,max=10000000;
+    if(price.value){[min,max]=price.value.split('-').map(Number);}
+
     let filtered=items.filter(p=>{
-        const price=parseInt(p.dataset.price);
+        const pr=parseInt(p.dataset.price);
         return (
             (active==='all'||p.dataset.category.includes(active)) &&
             p.querySelector('h6').textContent.toLowerCase().includes(key) &&
-            price>=min && price<=max
+            pr>=min && pr<=max
         );
     });
 
@@ -293,7 +270,9 @@ cats.forEach(c=>c.onclick=()=>{
 
 search.oninput=applyFilter;
 sort.onchange=applyFilter;
-priceDropdown.onchange=applyFilter;
+price.onchange=applyFilter;
+if(mobileCat) mobileCat.onchange=applyFilter;
+
 applyFilter();
 });
 </script>
