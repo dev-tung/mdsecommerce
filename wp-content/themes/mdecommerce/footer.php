@@ -65,7 +65,9 @@
                         <a class="footer-desc d-block small text-decoration-none mb-2">Người đại diện Đỗ Sơn Tùng</a>
                         <img
                             src="<?php echo get_template_directory_uri(); ?>/assets/img/bct.png"
-                            class="bct-img mb-2 w-50"
+                            class="bct-img mb-2"
+                            width="120"
+                            alt="Bộ công thương"
                         />
                     </div>
 
