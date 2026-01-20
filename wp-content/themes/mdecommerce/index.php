@@ -156,7 +156,7 @@
                             <a href="/cua-hang">Mua ngay</a>
                         </div>
                         <div class="slide-image">
-                            <img src="https://cdn.shopvnb.com/uploads/images/tin_tuc/lindan-vs-lee-chong-wei-top-5-tran-dau-dang-cap-cua-ky-phung-dich-thu-2.webp" alt="Khuyến mãi cầu lông">
+                            <img src="https://www.badmintonplanet.com/wp-content/uploads/2018/02/02-21-2018-badminton-news-lee-chong-wei-lin-dan.jpg" alt="Khuyến mãi cầu lông">
                         </div>
                     </div>
                 </div>
