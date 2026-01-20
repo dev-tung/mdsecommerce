@@ -1,3 +1,3 @@
-<?php
-header("Location: /cua-hang");
-exit;
+<?php get_header(); ?>
+
+<?php get_footer(); ?>
