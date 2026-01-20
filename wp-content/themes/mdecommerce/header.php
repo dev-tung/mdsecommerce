@@ -24,9 +24,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
             border-bottom: 1px solid #e5e7eb;
         }
-
-
-
+        
         .navbar-brand {
             color: #69A84F !important;
             font-weight: 700;
@@ -161,8 +159,10 @@
             </a>
 
             <div class="d-flex gap-4">
-                <a href="<?php echo home_url('/shop'); ?>" class="nav-link p-0">Cửa hàng</a>
+                <a href="<?php echo home_url('/'); ?>" class="nav-link p-0">Trang chủ</a>
+                <a href="<?php echo home_url('/cua-hang'); ?>" class="nav-link p-0">Cửa hàng</a>
                 <a href="<?php echo home_url('/string'); ?>" class="nav-link p-0">Căng cước</a>
+                <a href="<?php echo home_url('/category/blog'); ?>" class="nav-link p-0">Tin tức</a>
             </div>
 
         </div>
