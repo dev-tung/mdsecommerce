@@ -48,7 +48,7 @@ $query = new WP_Query($args);
 
 .product-title{
     color:#111;
-    font-size:0.8rem;
+    font-size:1rem;
     line-height:1.4;
     text-decoration:none;
 }
@@ -58,7 +58,7 @@ $query = new WP_Query($args);
 
 .product-price{
     color:#111;
-    font-size:0.8rem;
+    font-size:1rem;
     white-space:nowrap;
 }
 
@@ -75,7 +75,7 @@ $query = new WP_Query($args);
 }
 </style>
 
-<div class="container my-5">
+<div class="container-fluid p-lg-4 p-2">
 <?php if ($query->have_posts()) : ?>
 
 <?php
