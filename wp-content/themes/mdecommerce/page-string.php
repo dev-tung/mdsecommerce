@@ -131,7 +131,7 @@ $chunked = array_chunk($items, $perCol);
 
     <div class="row g-3">
         <?php foreach ($chunked as $col) : ?>
-            <div class="col-12 col-sm-6 col-md-4 d-flex flex-column gap-3">
+            <div class="col-12 col-sm-6 col-md-3 d-flex flex-column gap-3">
                 <?php foreach ($col as $item) : ?>
                     <div class="card product-item">
                         <div class="card-body d-flex justify-content-between align-items-center">
