@@ -74,7 +74,8 @@
                         <h6 class="footer-title">Liên kết</h6>
                         <a href="/" class="footer-link d-block small mb-2">Trang chủ</a>
                         <a href="/shop" class="footer-link d-block small mb-2">Cửa hàng</a>
-                        <a href="/string" class="footer-link d-block small">Căng cước</a>
+                        <a href="/string" class="footer-link d-block small mb-2">Căng cước</a>
+                        <a href="/ctv" class="footer-link d-block small">Cộng tác viên</a>
                     </div>
 
                     <div class="col-12 col-md-3">
