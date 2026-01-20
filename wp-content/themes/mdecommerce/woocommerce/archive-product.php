@@ -7,6 +7,7 @@
     background:#fff;
     transition:.25s;
     border:none;
+    width:100%;
 }
 .card:hover{
     transform:translateY(-6px);
@@ -14,6 +15,7 @@
 }
 .product-img{
     height:200px;
+    width:100%;
     object-fit:cover;
     border-radius:0;
 }
@@ -52,6 +54,8 @@
     display:grid;
     grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
     gap:16px;
+    width:100%;
+    overflow:hidden;
 }
 
 /* ================= SIDEBAR ================= */
@@ -69,26 +73,14 @@ aside .list-group-item.active{
     color:#fff;
 }
 
-/* FIX BO GÓC LIST-GROUP (BOOTSTRAP) */
-.list-group{
-    border-radius:0 !important;
-}
-
-.list-group-item{
-    border-radius:0 !important;
-}
-
-/* item đầu & cuối bootstrap hay bo góc */
+/* FIX BO GÓC LIST-GROUP */
+.list-group,
+.list-group-item,
 .list-group-item:first-child,
-.list-group-item:last-child{
-    border-radius:0 !important;
-}
-
-/* khi active cũng không được bo */
+.list-group-item:last-child,
 .list-group-item.active{
     border-radius:0 !important;
 }
-
 
 /* ================= FILTER BAR ================= */
 .filter-bar input,
@@ -99,26 +91,46 @@ aside .list-group-item.active{
 
 /* ================= MOBILE ================= */
 @media(max-width:768px){
+    html,body{
+        overflow-x:hidden;
+    }
+
+    .container{
+        padding-left:12px;
+        padding-right:12px;
+    }
+
     aside{order:2;}
     .col-md-9{order:1;}
-    .product-img{height:170px;}
+    .product-img{height:160px;}
 
     .filter-bar{
-        flex-direction:row;
         flex-wrap:wrap;
-        gap:12px;
-        overflow-x:auto;
+        gap:10px;
     }
     .filter-bar input,
     .filter-bar select{
-        flex:1 1 auto;
-        min-width:120px;
+        flex:1 1 100%;
+        min-width:0;
     }
 }
 
 /* Ẩn sidebar trên mobile */
 @media (max-width:768px){
     .sidebar-desktop{display:none;}
+}
+
+/* ================= MOBILE GRID: 2 CỘT – KHÔNG TRÀN ================= */
+@media (max-width:768px){
+    #productGrid{
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+        gap:10px;
+    }
+
+    .product-item{
+        width:100%;
+        min-width:0;
+    }
 }
 </style>
 
@@ -136,7 +148,6 @@ aside .list-group-item.active{
         $terms = get_terms([
             'taxonomy'   => 'product_cat',
             'hide_empty' => true,
-            'exclude'    => [],
         ]);
 
         if($terms && !is_wp_error($terms)):
@@ -154,7 +165,6 @@ aside .list-group-item.active{
 <!-- ================= PRODUCTS ================= -->
 <div class="col-md-9">
 
-<!-- ================= FILTER BAR ================= -->
 <div class="d-flex align-items-center mb-3 gap-3 filter-bar">
     <input id="searchInput" class="form-control w-100" placeholder="Tìm theo sản phẩm...">
 
@@ -179,14 +189,12 @@ $q = new WP_Query([
     'post_type'      => 'product',
     'posts_per_page' => -1,
     'post_status'    => 'publish',
-    'tax_query'      => [
-        [
-            'taxonomy' => 'product_cat',
-            'field'    => 'slug',
-            'terms'    => ['cuoc-cuon','cuoc-vi'],
-            'operator' => 'NOT IN'
-        ]
-    ]
+    'tax_query'      => [[
+        'taxonomy' => 'product_cat',
+        'field'    => 'slug',
+        'terms'    => ['cuoc-cuon','cuoc-vi'],
+        'operator' => 'NOT IN'
+    ]]
 ]);
 
 while($q->have_posts()): $q->the_post();
