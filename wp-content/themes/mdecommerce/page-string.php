@@ -118,7 +118,7 @@ while ($query->have_posts()) {
 /* ===============================
    2. CHIA THEO CỘT (GIÁ TĂNG DẦN DỌC)
    =============================== */
-$columns = 3;
+$columns = 4;
 $total   = count($items);
 $perCol  = ceil($total / $columns);
 $chunked = array_chunk($items, $perCol);
