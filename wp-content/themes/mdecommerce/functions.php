@@ -8,5 +8,3 @@ function mdecommerce_setup() {
 }
 add_action('after_setup_theme', 'mdecommerce_setup');
 
-// Ẩn admin bar ngoài frontend
-add_filter('show_admin_bar', '__return_false');
