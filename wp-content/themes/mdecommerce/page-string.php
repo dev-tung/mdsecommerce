@@ -64,13 +64,25 @@ $query = new WP_Query($args);
 
 .star{
     color:#69A84F;
-    font-size:0.9rem;
+    font-size:1rem;
     line-height:1;
 }
 
 @media (max-width:576px){
     .product-wrapper > h1{
-        font-size: 1.1rem;
+        font-size: 1.3rem;
+    }
+
+    .product-title{
+        font-size:0.9rem;
+    }
+
+    .product-price{
+        font-size:0.9rem;
+    }
+
+    .star{
+        font-size:0.9rem;
     }
 }
 </style>
