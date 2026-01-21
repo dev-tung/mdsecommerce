@@ -182,11 +182,17 @@
 </section>
 
 
-<!-- ================= PRODUCTS ================= -->
 <?php
-$args = [
+$args_vot = [
     'post_type'      => 'product',
     'posts_per_page' => 12,
+    'tax_query'      => [
+        [
+            'taxonomy' => 'product_cat',
+            'field'    => 'slug',
+            'terms'    => 'vot-cau-long'
+        ]
+    ],
     'meta_query'     => [
         [
             'key'     => '_sale_price',
@@ -197,16 +203,16 @@ $args = [
     ]
 ];
 
-$query = new WP_Query($args);
+$query_vot = new WP_Query($args_vot);
 
-if ($query->have_posts()) :
+if ($query_vot->have_posts()) :
 ?>
 <section class="py-5">
     <div class="container">
-        <h4 class="fw-bold mb-4">Sản phẩm khuyến mãi</h4>
+        <h4 class="fw-bold mb-4">Vợt cầu lông khuyến mãi</h4>
 
         <div id="productGrid">
-            <?php while ($query->have_posts()) : $query->the_post();
+            <?php while ($query_vot->have_posts()) : $query_vot->the_post();
                 $product = wc_get_product(get_the_ID());
                 if (!$product) continue;
 
@@ -241,6 +247,74 @@ if ($query->have_posts()) :
 endif;
 wp_reset_postdata();
 ?>
+
+
+<?php
+$args_giay = [
+    'post_type'      => 'product',
+    'posts_per_page' => 12,
+    'tax_query'      => [
+        [
+            'taxonomy' => 'product_cat',
+            'field'    => 'slug',
+            'terms'    => 'giay-cau-long'
+        ]
+    ],
+    'meta_query'     => [
+        [
+            'key'     => '_sale_price',
+            'value'   => 0,
+            'compare' => '>',
+            'type'    => 'NUMERIC'
+        ]
+    ]
+];
+
+$query_giay = new WP_Query($args_giay);
+
+if ($query_giay->have_posts()) :
+?>
+<section class="py-5 bg-light">
+    <div class="container">
+        <h4 class="fw-bold mb-4">Giày cầu lông khuyến mãi</h4>
+
+        <div id="productGrid">
+            <?php while ($query_giay->have_posts()) : $query_giay->the_post();
+                $product = wc_get_product(get_the_ID());
+                if (!$product) continue;
+
+                $image_url = get_the_post_thumbnail_url(get_the_ID(), 'woocommerce_thumbnail') ?: wc_placeholder_img_src();
+            ?>
+            <div class="card h-100">
+                <img src="<?php echo esc_url($image_url); ?>" class="product-img" alt="<?php the_title(); ?>">
+
+                <div class="card-body text-center d-flex flex-column">
+                    <h6><?php the_title(); ?></h6>
+
+                    <?php if ($product->get_regular_price()) : ?>
+                        <div class="price-old">
+                            <?php echo wc_price($product->get_regular_price()); ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <div class="price-sale mb-2">
+                        <?php echo wc_price($product->get_sale_price()); ?>
+                    </div>
+
+                    <a href="<?php the_permalink(); ?>" class="btn btn-buy btn-sm mt-auto">
+                        Xem chi tiết
+                    </a>
+                </div>
+            </div>
+            <?php endwhile; ?>
+        </div>
+    </div>
+</section>
+<?php
+endif;
+wp_reset_postdata();
+?>
+
 
 <!-- ================= SWIPER JS ================= -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
