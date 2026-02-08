@@ -240,9 +240,11 @@ aside .list-group-item.active{
                 if ($b->slug === 'vot-cau-long') return 1;
                 return strcmp($a->name, $b->name);
             });
-            
+
             foreach($terms as $t):
                 if(in_array($t->slug,['uncategorized','cuoc-cuon','cuoc-vi'])) continue;
+
+                $active = ($t->slug === 'vot-cau-long') ? 'active' : '';
         ?>
         <li class="list-group-item" data-category="<?= esc_attr($t->slug); ?>">
             <?= esc_html($t->name); ?>
@@ -376,7 +378,9 @@ const priceDropdown=document.getElementById('priceDropdown');
 const categoryMobile=document.getElementById('categoryMobile');
 
 function applyFilter(){
-    const active = document.querySelector('#categoryFilter .active').dataset.category;
+    const active = document.querySelector('#categoryFilter .active')?.dataset.category;
+    if(!active) return;
+
     const key = search.value.toLowerCase();
 
     let min = 0, max = 10000000;
@@ -389,7 +393,7 @@ function applyFilter(){
         const category = p.dataset.category;
 
         return (
-            (active === 'all' || category === active) &&
+            category === active &&
             p.querySelector('h6').textContent.toLowerCase().includes(key) &&
             price >= min && price <= max
         );
@@ -401,6 +405,7 @@ function applyFilter(){
     grid.innerHTML = '';
     filtered.forEach(i => grid.appendChild(i));
 }
+
 
 
 cats.forEach(c=>c.onclick=()=>{
