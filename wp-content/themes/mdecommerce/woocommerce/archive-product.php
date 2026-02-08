@@ -307,15 +307,23 @@ $regular = (int)$product->get_regular_price();
 $sale    = (int)$product->get_sale_price();
 $price   = $sale ?: $regular;
 
-$terms_p = get_the_terms(get_the_ID(),'product_cat');
+$terms_p = get_the_terms(get_the_ID(), 'product_cat');
 $slugs = [];
-if($terms_p){
-    foreach($terms_p as $t){
-        if(!in_array($t->slug,['uncategorized','cuoc-cuon','cuoc-vi'])){
+
+if ($terms_p && !is_wp_error($terms_p)) {
+    // lấy category sâu nhất
+    usort($terms_p, function ($a, $b) {
+        return $b->parent - $a->parent;
+    });
+
+    foreach ($terms_p as $t) {
+        if (!in_array($t->slug, ['uncategorized','cuoc-cuon','cuoc-vi'])) {
             $slugs[] = $t->slug;
+            break; // CHỈ LẤY 1 category CHÍNH
         }
     }
 }
+
 
 $image = has_post_thumbnail()
     ? get_the_post_thumbnail_url(get_the_ID(),'medium')
