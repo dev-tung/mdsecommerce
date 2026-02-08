@@ -25,31 +25,53 @@ class ProductSync
     public function sync_products()
     {
         $data = $this->get_products_from_api();
-        if (empty($data['data'])) return;
+
+        if (is_wp_error($data)) {
+            return $data;
+        }
 
         foreach ($data['data'] as $item) {
 
+            if (empty($item['product_id'])) {
+                return new WP_Error(
+                    'invalid_item',
+                    '❌ Dữ liệu sản phẩm không hợp lệ (thiếu product_id)'
+                );
+            }
+
             $post_id = $this->get_product_by_pos_id($item['product_id']);
 
-            $post_id
-                ? $this->update_product($post_id, $item)
-                : $post_id = $this->create_product($item);
+            if ($post_id) {
+                $this->update_product($post_id, $item);
+            } else {
+                $post_id = $this->create_product($item);
+            }
 
-            if (!$post_id) continue;
+            if (!$post_id) {
+                return new WP_Error(
+                    'product_sync_error',
+                    '❌ Không thể tạo / cập nhật sản phẩm: ' . ($item['name'] ?? '')
+                );
+            }
 
             $this->sync_price_stock($post_id, $item);
             $this->sync_category($post_id, $item);
         }
+
+        return true;
     }
 
     /* =============================
-     * STATUS LOGIC (CORE)
+     * STATUS LOGIC
      * ============================= */
 
     private function resolve_status($qty)
     {
-        if ($qty <= 0) return 'private'; // ẨN WEBSITE
-        return 'publish';               // CÒN HÀNG
+        // <= 0 → ẨN WEBSITE
+        if ($qty <= 0) return 'private';
+
+        // > 0 → HIỂN THỊ
+        return 'publish';
     }
 
     /* =============================
@@ -66,7 +88,9 @@ class ProductSync
             'post_status' => $this->resolve_status($qty),
         ]);
 
-        if (is_wp_error($post_id)) return 0;
+        if (is_wp_error($post_id)) {
+            return 0;
+        }
 
         wp_set_object_terms($post_id, 'simple', 'product_type');
         update_post_meta($post_id, self::META_POS_ID, $item['product_id']);
@@ -98,10 +122,12 @@ class ProductSync
         $price = $item['price'] ?? '';
         $sale  = $item['sale_price'] ?? '';
 
+        // PRICE
         $product->set_regular_price($price);
         $product->set_sale_price($sale ?: '');
         $product->set_price($sale ?: $price);
 
+        // STOCK
         $product->set_manage_stock(true);
         $product->set_stock_quantity(max(0, $qty));
         $product->set_stock_status($qty > 0 ? 'instock' : 'outofstock');
@@ -133,20 +159,46 @@ class ProductSync
     private function get_product_by_pos_id($pos_id)
     {
         global $wpdb;
-        return $wpdb->get_var($wpdb->prepare(
-            "SELECT post_id FROM {$wpdb->postmeta}
-             WHERE meta_key = %s AND meta_value = %s",
-            self::META_POS_ID,
-            $pos_id
-        ));
+
+        return $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT post_id FROM {$wpdb->postmeta}
+                 WHERE meta_key = %s AND meta_value = %s",
+                self::META_POS_ID,
+                $pos_id
+            )
+        );
     }
 
     private function get_products_from_api()
     {
         $res = wp_remote_get(self::API_URL, ['timeout' => 20]);
-        if (is_wp_error($res)) return [];
 
-        return json_decode(wp_remote_retrieve_body($res), true) ?: [];
+        if (is_wp_error($res)) {
+            return new WP_Error(
+                'api_error',
+                '❌ Không gọi được API: ' . $res->get_error_message()
+            );
+        }
+
+        $body = wp_remote_retrieve_body($res);
+        $json = json_decode($body, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return new WP_Error(
+                'json_error',
+                '❌ API trả JSON không hợp lệ'
+            );
+        }
+
+        if (empty($json['data'])) {
+            return new WP_Error(
+                'empty_data',
+                '⚠️ API không có dữ liệu sản phẩm'
+            );
+        }
+
+        return $json;
     }
 
     /* =============================
@@ -158,8 +210,17 @@ class ProductSync
         if (!current_user_can('manage_options')) return;
         if (($_GET['pos_sync'] ?? '') !== 'run') return;
 
-        $this->sync_products();
-        wp_die('✅ POS Sync done');
+        $result = $this->sync_products();
+
+        if (is_wp_error($result)) {
+            wp_die(
+                $result->get_error_message(),
+                'POS Sync Error',
+                ['response' => 500]
+            );
+        }
+
+        wp_die('✅ POS Sync done!');
     }
 }
 
