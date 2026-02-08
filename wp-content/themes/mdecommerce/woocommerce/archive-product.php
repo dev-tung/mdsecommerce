@@ -372,29 +372,32 @@ const priceDropdown=document.getElementById('priceDropdown');
 const categoryMobile=document.getElementById('categoryMobile');
 
 function applyFilter(){
-    const active=document.querySelector('#categoryFilter .active').dataset.category;
-    const key=search.value.toLowerCase();
+    const active = document.querySelector('#categoryFilter .active').dataset.category;
+    const key = search.value.toLowerCase();
 
-    let min=0,max=10000000;
+    let min = 0, max = 10000000;
     if(priceDropdown.value){
-        [min,max]=priceDropdown.value.split('-').map(Number);
+        [min, max] = priceDropdown.value.split('-').map(Number);
     }
 
-    let filtered=items.filter(p=>{
-        const price=parseInt(p.dataset.price);
+    let filtered = items.filter(p => {
+        const price = parseInt(p.dataset.price);
+        const category = p.dataset.category;
+
         return (
-            (active==='all'||p.dataset.category.includes(active)) &&
+            (active === 'all' || category === active) &&
             p.querySelector('h6').textContent.toLowerCase().includes(key) &&
-            price>=min && price<=max
+            price >= min && price <= max
         );
     });
 
-    if(sort.value==='price-asc') filtered.sort((a,b)=>a.dataset.price-b.dataset.price);
-    if(sort.value==='price-desc') filtered.sort((a,b)=>b.dataset.price-a.dataset.price);
+    if(sort.value === 'price-asc') filtered.sort((a,b)=>a.dataset.price-b.dataset.price);
+    if(sort.value === 'price-desc') filtered.sort((a,b)=>b.dataset.price-a.dataset.price);
 
-    grid.innerHTML='';
-    filtered.forEach(i=>grid.appendChild(i));
+    grid.innerHTML = '';
+    filtered.forEach(i => grid.appendChild(i));
 }
+
 
 cats.forEach(c=>c.onclick=()=>{
     cats.forEach(i=>i.classList.remove('active'));
