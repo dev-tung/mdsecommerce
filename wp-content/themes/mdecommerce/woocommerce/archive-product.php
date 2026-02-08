@@ -228,7 +228,6 @@ aside .list-group-item.active{
 <div class="bg-white p-3 shadow-sm">
     <h6 class="fw-bold mb-3">Danh mục</h6>
     <ul class="list-group" id="categoryFilter">
-        <li class="list-group-item active" data-category="all">Tất cả</li>
         <?php
         $terms = get_terms([
             'taxonomy'   => 'product_cat',
@@ -236,6 +235,12 @@ aside .list-group-item.active{
         ]);
 
         if($terms && !is_wp_error($terms)):
+            usort($terms, function($a, $b){
+                if ($a->slug === 'vot-cau-long') return -1;
+                if ($b->slug === 'vot-cau-long') return 1;
+                return strcmp($a->name, $b->name);
+            });
+            
             foreach($terms as $t):
                 if(in_array($t->slug,['uncategorized','cuoc-cuon','cuoc-vi'])) continue;
         ?>
@@ -252,7 +257,6 @@ aside .list-group-item.active{
 
 <!-- ================= CATEGORY MOBILE ================= -->
 <select id="categoryMobile" class="form-select mb-3 category-mobile">
-    <option value="all">Tất cả danh mục</option>
     <?php
     if($terms && !is_wp_error($terms)):
         foreach($terms as $t):
