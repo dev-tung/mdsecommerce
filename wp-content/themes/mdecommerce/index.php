@@ -186,12 +186,12 @@
 $args_vot = [
     'post_type'      => 'product',
     'posts_per_page' => 12,
+    'post_status'    => 'publish',
     'tax_query'      => [
         [
             'taxonomy' => 'product_cat',
             'field'    => 'slug',
             'terms'    => 'vot-cau-long',
-            'post_status'    => 'publish',
         ]
     ],
     'meta_query'     => [
@@ -254,12 +254,12 @@ wp_reset_postdata();
 $args_giay = [
     'post_type'      => 'product',
     'posts_per_page' => 12,
+    'post_status'    => 'publish',
     'tax_query'      => [
         [
             'taxonomy' => 'product_cat',
             'field'    => 'slug',
             'terms'    => 'giay-cau-long',
-            'post_status'    => 'publish',
         ]
     ],
     'meta_query'     => [
