@@ -190,7 +190,8 @@ $args_vot = [
         [
             'taxonomy' => 'product_cat',
             'field'    => 'slug',
-            'terms'    => 'vot-cau-long'
+            'terms'    => 'vot-cau-long',
+            'post_status'    => 'publish',
         ]
     ],
     'meta_query'     => [
@@ -257,7 +258,8 @@ $args_giay = [
         [
             'taxonomy' => 'product_cat',
             'field'    => 'slug',
-            'terms'    => 'giay-cau-long'
+            'terms'    => 'giay-cau-long',
+            'post_status'    => 'publish',
         ]
     ],
     'meta_query'     => [
