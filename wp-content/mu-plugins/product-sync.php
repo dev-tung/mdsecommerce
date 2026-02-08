@@ -12,7 +12,7 @@ class ProductSync
     const META_POS_GROUP = '_pos_group_name';
 
     const API_URL   = 'https://manhdungsports.io.vn/job/inventory-website';
-    const SECRET_KEY = 'POS_SYNC_SECRET_123'; // 🔐 đổi key này
+    const SECRET_KEY = 'IlE&Q%An0AbcoNwj'; // 🔐 đổi key này
 
     public function __construct()
     {
