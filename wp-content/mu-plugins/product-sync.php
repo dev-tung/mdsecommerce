@@ -1,12 +1,10 @@
 <?php
 /*
 Plugin Name: POS Sync (MU)
-Description: Sync products & categories from POS API to WooCommerce
+Description: Sync products from POS API to WooCommerce
 */
 
-if (!defined('ABSPATH')) {
-    exit;
-}
+if (!defined('ABSPATH')) exit;
 
 class ProductSync
 {
@@ -21,188 +19,147 @@ class ProductSync
     }
 
     /* =============================
-     * PUBLIC
+     * MAIN
      * ============================= */
 
     public function sync_products()
     {
-        $response = $this->get_products_from_api();
+        $data = $this->get_products_from_api();
+        if (empty($data['data'])) return;
 
-        if (
-            empty($response) ||
-            empty($response['success']) ||
-            empty($response['data'])
-        ) {
-            return false;
-        }
+        foreach ($data['data'] as $item) {
 
-        foreach ($response['data'] as $item) {
+            $post_id = $this->get_product_by_pos_id($item['product_id']);
 
-            $post_id = $this->get_product_by_pos_id($item['id']);
+            $post_id
+                ? $this->update_product($post_id, $item)
+                : $post_id = $this->create_product($item);
 
-            if (!$post_id) {
-                $post_id = $this->create_product($item);
-            } else {
-                $this->update_product($post_id, $item);
-            }
+            if (!$post_id) continue;
 
-            if (!$post_id) {
-                continue;
-            }
-
-            $this->update_price_and_stock($post_id, $item);
+            $this->sync_price_stock($post_id, $item);
             $this->sync_category($post_id, $item);
         }
-
-        return true;
     }
 
     /* =============================
-     * CORE LOGIC
+     * STATUS LOGIC (CORE)
      * ============================= */
 
-    private function determine_post_status($item)
+    private function resolve_status($qty)
     {
-        // POS không active → draft
-        if (($item['status'] ?? '') !== 'active') {
-            return 'pending';
-        }
-
-        // HẾT HÀNG → pending
-        $quantity = (int) ($item['quantity'] ?? 0);
-        if ($quantity <= 0) {
-            return 'pending';
-        }
-
-        // Còn hàng → publish
-        return 'publish';
+        if ($qty <= 0) return 'private'; // ẨN WEBSITE
+        return 'publish';               // CÒN HÀNG
     }
 
-    private function get_product_by_pos_id($pos_id)
-    {
-        global $wpdb;
-
-        return $wpdb->get_var(
-            $wpdb->prepare(
-                "SELECT post_id FROM {$wpdb->postmeta}
-                 WHERE meta_key = %s AND meta_value = %s",
-                self::META_POS_ID,
-                $pos_id
-            )
-        );
-    }
+    /* =============================
+     * PRODUCT
+     * ============================= */
 
     private function create_product($item)
     {
+        $qty = (int) ($item['quantity'] ?? 0);
+
         $post_id = wp_insert_post([
-            'post_title'   => $item['name'] ?? 'Không tên',
-            'post_type'    => 'product',
-            'post_status'  => $this->determine_post_status($item),
-            'post_content' => $item['description'] ?? '',
+            'post_type'   => 'product',
+            'post_title'  => $item['name'] ?? 'Không tên',
+            'post_status' => $this->resolve_status($qty),
         ]);
 
-        if (is_wp_error($post_id)) {
-            return 0;
-        }
+        if (is_wp_error($post_id)) return 0;
 
         wp_set_object_terms($post_id, 'simple', 'product_type');
-        update_post_meta($post_id, self::META_POS_ID, $item['id']);
+        update_post_meta($post_id, self::META_POS_ID, $item['product_id']);
 
         return $post_id;
     }
 
     private function update_product($post_id, $item)
     {
+        $qty = (int) ($item['quantity'] ?? 0);
+
         wp_update_post([
-            'ID'           => $post_id,
-            'post_title'   => $item['name'] ?? 'Không tên',
-            'post_content' => $item['description'] ?? '',
-            'post_status'  => $this->determine_post_status($item),
+            'ID'          => $post_id,
+            'post_title'  => $item['name'] ?? 'Không tên',
+            'post_status' => $this->resolve_status($qty),
         ]);
     }
 
-    /**
-     * Sync CATEGORY theo NAME (reset sạch category cũ)
-     */
-    private function sync_category($post_id, $item)
-    {
-        if (empty($item['group_name'])) {
-            return;
-        }
+    /* =============================
+     * PRICE + STOCK
+     * ============================= */
 
-        $group_name = trim((string) $item['group_name']);
-
-        // Chặn tuyệt đối numeric
-        if ($group_name === '' || is_numeric($group_name)) {
-            return;
-        }
-
-        // Xóa toàn bộ category cũ
-        wp_set_object_terms($post_id, [], 'product_cat');
-
-        // Gán lại bằng NAME
-        wp_set_object_terms($post_id, [$group_name], 'product_cat');
-
-        // Meta debug
-        update_post_meta($post_id, self::META_POS_GROUP, $group_name);
-    }
-
-    /**
-     * Giá + tồn kho
-     */
-    private function update_price_and_stock($post_id, $item)
+    private function sync_price_stock($post_id, $item)
     {
         $product = wc_get_product($post_id);
-        if (!$product) {
-            return;
-        }
+        if (!$product) return;
 
-        $regular  = $item['price'] ?? '';
-        $sale     = $item['sale_price'] ?? '';
-        $quantity = (int) ($item['quantity'] ?? 0);
+        $qty   = (int) ($item['quantity'] ?? 0);
+        $price = $item['price'] ?? '';
+        $sale  = $item['sale_price'] ?? '';
 
-        // PRICE
-        $product->set_regular_price($regular);
+        $product->set_regular_price($price);
         $product->set_sale_price($sale ?: '');
-        $product->set_price($sale ?: $regular);
+        $product->set_price($sale ?: $price);
 
-        // STOCK
         $product->set_manage_stock(true);
-        $product->set_stock_quantity($quantity);
-        $product->set_stock_status($quantity > 0 ? 'instock' : 'outofstock');
+        $product->set_stock_quantity(max(0, $qty));
+        $product->set_stock_status($qty > 0 ? 'instock' : 'outofstock');
 
         $product->save();
     }
 
-    private function get_products_from_api()
+    /* =============================
+     * CATEGORY
+     * ============================= */
+
+    private function sync_category($post_id, $item)
     {
-        $response = wp_remote_get(self::API_URL, ['timeout' => 20]);
+        if (empty($item['product_group_name'])) return;
 
-        if (is_wp_error($response)) {
-            return [];
-        }
+        $name = trim($item['product_group_name']);
+        if ($name === '' || is_numeric($name)) return;
 
-        return json_decode(
-            wp_remote_retrieve_body($response),
-            true
-        ) ?: [];
+        wp_set_object_terms($post_id, [], 'product_cat');
+        wp_set_object_terms($post_id, [$name], 'product_cat');
+
+        update_post_meta($post_id, self::META_POS_GROUP, $name);
     }
 
-    /**
-     * Trigger bằng URL:
-     * /wp-admin/?pos_sync=run
-     */
+    /* =============================
+     * HELPERS
+     * ============================= */
+
+    private function get_product_by_pos_id($pos_id)
+    {
+        global $wpdb;
+        return $wpdb->get_var($wpdb->prepare(
+            "SELECT post_id FROM {$wpdb->postmeta}
+             WHERE meta_key = %s AND meta_value = %s",
+            self::META_POS_ID,
+            $pos_id
+        ));
+    }
+
+    private function get_products_from_api()
+    {
+        $res = wp_remote_get(self::API_URL, ['timeout' => 20]);
+        if (is_wp_error($res)) return [];
+
+        return json_decode(wp_remote_retrieve_body($res), true) ?: [];
+    }
+
+    /* =============================
+     * MANUAL TRIGGER
+     * ============================= */
+
     public function handle_manual_sync()
     {
-        if (
-            !current_user_can('manage_options') ||
-            ($_GET['pos_sync'] ?? '') !== 'run'
-        ) {
-            return;
-        }
+        if (!current_user_can('manage_options')) return;
+        if (($_GET['pos_sync'] ?? '') !== 'run') return;
 
         $this->sync_products();
-        wp_die('✅ POS Sync done!');
+        wp_die('✅ POS Sync done');
     }
 }
 
