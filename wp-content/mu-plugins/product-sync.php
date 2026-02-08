@@ -10,8 +10,9 @@ if (!defined('ABSPATH')) {
 
 class ProductSync
 {
-    const META_POS_ID       = '_pos_product_id';
-    const META_POS_GROUP    = '_pos_group_name';
+    const META_POS_ID    = '_pos_product_id';
+    const META_POS_GROUP = '_pos_group_name';
+
     const API_URL = 'https://manhdungsports.io.vn/api/product/list';
 
     public function __construct()
@@ -20,7 +21,7 @@ class ProductSync
     }
 
     /* =============================
-     * PUBLIC METHODS
+     * PUBLIC
      * ============================= */
 
     public function sync_products()
@@ -36,6 +37,7 @@ class ProductSync
         }
 
         foreach ($response['data'] as $item) {
+
             $post_id = $this->get_product_by_pos_id($item['id']);
 
             if (!$post_id) {
@@ -44,7 +46,11 @@ class ProductSync
                 $this->update_product($post_id, $item);
             }
 
-            $this->update_price($post_id, $item);
+            if (!$post_id) {
+                continue;
+            }
+
+            $this->update_price_and_stock($post_id, $item);
             $this->sync_category($post_id, $item);
         }
 
@@ -52,8 +58,25 @@ class ProductSync
     }
 
     /* =============================
-     * INTERNAL
+     * CORE LOGIC
      * ============================= */
+
+    private function determine_post_status($item)
+    {
+        // POS không active → draft
+        if (($item['status'] ?? '') !== 'active') {
+            return 'pending';
+        }
+
+        // HẾT HÀNG → pending
+        $quantity = (int) ($item['quantity'] ?? 0);
+        if ($quantity <= 0) {
+            return 'pending';
+        }
+
+        // Còn hàng → publish
+        return 'publish';
+    }
 
     private function get_product_by_pos_id($pos_id)
     {
@@ -74,7 +97,7 @@ class ProductSync
         $post_id = wp_insert_post([
             'post_title'   => $item['name'] ?? 'Không tên',
             'post_type'    => 'product',
-            'post_status'  => ($item['status'] ?? '') === 'active' ? 'publish' : 'draft',
+            'post_status'  => $this->determine_post_status($item),
             'post_content' => $item['description'] ?? '',
         ]);
 
@@ -94,12 +117,12 @@ class ProductSync
             'ID'           => $post_id,
             'post_title'   => $item['name'] ?? 'Không tên',
             'post_content' => $item['description'] ?? '',
-            'post_status'  => ($item['status'] ?? '') === 'active' ? 'publish' : 'draft',
+            'post_status'  => $this->determine_post_status($item),
         ]);
     }
 
     /**
-     * Sync CATEGORY bằng NAME + lưu meta
+     * Sync CATEGORY theo NAME (reset sạch category cũ)
      */
     private function sync_category($post_id, $item)
     {
@@ -114,28 +137,40 @@ class ProductSync
             return;
         }
 
-        // 🔥 XOÁ TOÀN BỘ category cũ (kể cả t37)
+        // Xóa toàn bộ category cũ
         wp_set_object_terms($post_id, [], 'product_cat');
 
-        // ✅ Gán lại bằng TÊN
+        // Gán lại bằng NAME
         wp_set_object_terms($post_id, [$group_name], 'product_cat');
 
-        // Lưu meta debug
+        // Meta debug
         update_post_meta($post_id, self::META_POS_GROUP, $group_name);
     }
 
-
-    private function update_price($post_id, $item)
+    /**
+     * Giá + tồn kho
+     */
+    private function update_price_and_stock($post_id, $item)
     {
         $product = wc_get_product($post_id);
-        if (!$product) return;
+        if (!$product) {
+            return;
+        }
 
-        $regular = $item['price'] ?? '';
-        $sale    = $item['sale_price'] ?? '';
+        $regular  = $item['price'] ?? '';
+        $sale     = $item['sale_price'] ?? '';
+        $quantity = (int) ($item['quantity'] ?? 0);
 
+        // PRICE
         $product->set_regular_price($regular);
         $product->set_sale_price($sale ?: '');
         $product->set_price($sale ?: $regular);
+
+        // STOCK
+        $product->set_manage_stock(true);
+        $product->set_stock_quantity($quantity);
+        $product->set_stock_status($quantity > 0 ? 'instock' : 'outofstock');
+
         $product->save();
     }
 
@@ -147,11 +182,14 @@ class ProductSync
             return [];
         }
 
-        return json_decode(wp_remote_retrieve_body($response), true) ?: [];
+        return json_decode(
+            wp_remote_retrieve_body($response),
+            true
+        ) ?: [];
     }
 
     /**
-     * Trigger sync bằng URL:
+     * Trigger bằng URL:
      * /wp-admin/?pos_sync=run
      */
     public function handle_manual_sync()
@@ -164,7 +202,7 @@ class ProductSync
         }
 
         $this->sync_products();
-        wp_die('POS Sync done!');
+        wp_die('✅ POS Sync done!');
     }
 }
 
