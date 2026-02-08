@@ -246,7 +246,7 @@ aside .list-group-item.active{
 
                 $active = ($t->slug === 'vot-cau-long') ? 'active' : '';
         ?>
-        <li class="list-group-item" data-category="<?= esc_attr($t->slug); ?>">
+        <li class="list-group-item <?= $active ?>" data-category="<?= esc_attr($t->slug); ?>">
             <?= esc_html($t->name); ?>
         </li>
         <?php endforeach; endif; ?>
