@@ -11,7 +11,7 @@ class ProductSync
     const META_POS_ID    = '_pos_product_id';
     const META_POS_GROUP = '_pos_group_name';
 
-    const API_URL = 'https://manhdungsports.io.vn/api/product/list';
+    const API_URL = 'https://manhdungsports.io.vn/job/inventory-website';
 
     public function __construct()
     {
