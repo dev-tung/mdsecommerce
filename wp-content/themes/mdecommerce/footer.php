@@ -78,6 +78,7 @@
                         <a href="/shop" class="footer-link d-block small mb-2">Cửa hàng</a>
                         <a href="/string" class="footer-link d-block small mb-2">Căng cước</a>
                         <a href="/gio-hang" class="footer-link d-block small mb-2">Giỏ hàng</a>
+                        <a href="/lien-he" class="footer-link d-block small">Liên hệ</a>
                     </div>
 
                     <div class="col-12 col-md-2">
