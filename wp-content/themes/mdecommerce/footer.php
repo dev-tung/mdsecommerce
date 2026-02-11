@@ -77,13 +77,14 @@
                         <a href="/" class="footer-link d-block small mb-2">Trang chủ</a>
                         <a href="/shop" class="footer-link d-block small mb-2">Cửa hàng</a>
                         <a href="/string" class="footer-link d-block small mb-2">Căng cước</a>
-                        <a href="/ctv" class="footer-link d-block small">Cộng tác viên</a>
+                        <a href="/gio-hang" class="footer-link d-block small mb-2">Giỏ hàng</a>
                     </div>
 
                     <div class="col-12 col-md-2">
-                        <h6 class="footer-title">Bảo hành</h6>
-                        <a class="footer-link d-block small mb-2" href="https://manhdungsports.com/chinh-sach-bao-hanh-vot-cau-long-yonex/" >Vợt Yonex</a>
-                        <a class="footer-link d-block small mb-2" href="https://manhdungsports.com/chinh-sach-bao-hanh-vot-cau-long-li-ning/" >Vợt Lining</a>
+                        <h6 class="footer-title">Chính sách</h6>
+                        <a class="footer-link d-block small mb-2" href="https://manhdungsports.com/chinh-sach-bao-hanh-vot-cau-long-yonex/" >Bảo hành vợt Yonex</a>
+                        <a class="footer-link d-block small mb-2" href="https://manhdungsports.com/chinh-sach-bao-hanh-vot-cau-long-li-ning/" >Bảo hành vợt Lining</a>
+                        <a href="/ctv" class="footer-link d-block small">Cộng tác viên</a>
                     </div>
 
                     <div class="col-12 col-md-2">

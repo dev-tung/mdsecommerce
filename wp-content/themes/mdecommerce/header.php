@@ -163,6 +163,7 @@
                 <a href="<?php echo home_url('/cua-hang'); ?>" class="nav-link p-0">Cửa hàng</a>
                 <a href="<?php echo home_url('/string'); ?>" class="nav-link p-0">Căng cước</a>
                 <a href="<?php echo home_url('/category/blog'); ?>" class="nav-link p-0">Tin tức</a>
+                <a href="<?php echo home_url('/gio-hang'); ?>" class="nav-link p-0">Giỏ hàng</a>
             </div>
 
         </div>
