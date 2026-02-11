@@ -82,8 +82,8 @@
 
                     <div class="col-12 col-md-2">
                         <h6 class="footer-title">Bảo hành</h6>
-                        <a class="footer-link d-block small mb-2" href="https://manhdungsports.store/chinh-sach-bao-hanh-vot-cau-long-yonex/" >Vợt Yonex</a>
-                        <a class="footer-link d-block small mb-2" href="https://manhdungsports.store/chinh-sach-bao-hanh-vot-cau-long-li-ning/" >Vợt Lining</a>
+                        <a class="footer-link d-block small mb-2" href="https://manhdungsports.com/chinh-sach-bao-hanh-vot-cau-long-yonex/" >Vợt Yonex</a>
+                        <a class="footer-link d-block small mb-2" href="https://manhdungsports.com/chinh-sach-bao-hanh-vot-cau-long-li-ning/" >Vợt Lining</a>
                     </div>
 
                     <div class="col-12 col-md-2">
@@ -97,7 +97,7 @@
                             Zalo
                         </a>
 
-                        <a href="https://www.tiktok.com/@manhdungsports.store" target="_blank" class="footer-link d-block small mb-2">
+                        <a href="https://www.tiktok.com/@manhdungsports.com" target="_blank" class="footer-link d-block small mb-2">
                             TikTok
                         </a>
 
