@@ -151,22 +151,38 @@
     </a>
 
     <!-- HEADER -->
-    <nav class="navbar navbar-light align-items-center">
-        <div class="container d-flex justify-content-between align-items-center">
+    <nav class="navbar navbar-light navbar-expand-lg">
+        <div class="container">
 
+            <!-- Logo -->
             <a class="navbar-brand" href="<?php echo home_url(); ?>">
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo.png" alt="Logo" width="120">
             </a>
 
-            <div class="d-flex gap-4">
-                <a href="<?php echo home_url('/'); ?>" class="nav-link p-0">Trang chủ</a>
-                <a href="<?php echo home_url('/cua-hang'); ?>" class="nav-link p-0">Cửa hàng</a>
-                <a href="<?php echo home_url('/string'); ?>" class="nav-link p-0">Căng cước</a>
-                <a href="<?php echo home_url('/category/blog'); ?>" class="nav-link p-0">Tin tức</a>
-                <a href="<?php echo home_url('/gio-hang'); ?>" class="nav-link p-0">Giỏ hàng</a>
+            <!-- Toggle button (mobile) -->
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menu -->
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <div class="navbar-nav ms-auto gap-lg-4">
+                    <a href="<?php echo home_url('/'); ?>" class="nav-link">Trang chủ</a>
+                    <a href="<?php echo home_url('/cua-hang'); ?>" class="nav-link">Cửa hàng</a>
+                    <a href="<?php echo home_url('/string'); ?>" class="nav-link">Căng cước</a>
+                    <a href="<?php echo home_url('/category/blog'); ?>" class="nav-link">Tin tức</a>
+                    <a href="<?php echo home_url('/gio-hang'); ?>" class="nav-link">Giỏ hàng</a>
+                    <a href="<?php echo home_url('/lien-he'); ?>" class="nav-link">Liên hệ</a>
+                </div>
             </div>
 
         </div>
     </nav>
     <!-- END HEADER -->
+
 
