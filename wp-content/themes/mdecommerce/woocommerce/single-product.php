@@ -79,7 +79,6 @@ if ( ! $product ) return;
   scrollbar-width: thin;
   scrollbar-color: rgba(0,0,0,0.35) transparent;
 }
-
 </style>
 
 <div class="container-fluid p-lg-4 p-2">
@@ -114,6 +113,7 @@ if ( ! $product ) return;
       foreach ( $gallery_ids as $image_id ) :
         $img = wp_get_attachment_image_src( $image_id, 'large' );
         if ( ! $img ) continue;
+
         // Nếu chỉ có 1 ảnh → full cột
         $col_class = ( $image_count === 1 ) ? 'col-12' : 'col-12 col-md-6';
       ?>
@@ -130,7 +130,6 @@ if ( ! $product ) return;
 
     </div>
   </div>
-
 
     <!-- =====================
          INFO SECTION (4/12)
@@ -160,6 +159,42 @@ if ( ! $product ) return;
           </div>
         <?php endif; ?>
 
+        <!-- =====================
+             ADD TO CART
+        ====================== -->
+        <?php if ( $product->is_purchasable() && $product->is_in_stock() ) : ?>
+          <form 
+            class="cart mt-4"
+            action="<?php echo esc_url( wc_get_cart_url() ); ?>"
+            method="post"
+          >
+
+            <!-- QUANTITY -->
+            <div class="mb-3">
+              <?php
+              woocommerce_quantity_input([
+                'min_value' => 1,
+                'max_value' => $product->get_max_purchase_quantity(),
+              ]);
+              ?>
+            </div>
+
+            <!-- BUTTON -->
+            <button 
+              type="submit"
+              name="add-to-cart"
+              value="<?php echo esc_attr( $product->get_id() ); ?>"
+              class="btn btn-dark w-100 py-3 fw-bold"
+            >
+              Thêm vào giỏ hàng
+            </button>
+
+          </form>
+        <?php else : ?>
+          <div class="alert alert-secondary mt-4">
+            Sản phẩm hiện không khả dụng
+          </div>
+        <?php endif; ?>
 
       </div>
     </div>
