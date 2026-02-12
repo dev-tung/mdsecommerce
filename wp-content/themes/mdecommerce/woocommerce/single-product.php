@@ -152,7 +152,7 @@ if ( ! $product ) return;
         ====================== -->
         <?php if ( $product->is_purchasable() && $product->is_in_stock() ) : ?>
           <form 
-            class="cart mt-4"
+            class="cart my-4"
             action="<?php echo esc_url( wc_get_cart_url() ); ?>"
             method="post"
           >
