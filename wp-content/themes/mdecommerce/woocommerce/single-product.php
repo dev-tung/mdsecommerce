@@ -147,18 +147,6 @@ if ( ! $product ) return;
           <?php echo $product->get_price_html(); ?>
         </p>
 
-        <!-- SHORT DESCRIPTION -->
-        <?php if ( $product->get_description() ) : ?>
-          <div class="text-muted mb-4 small">
-            <?php
-            echo apply_filters(
-              'the_content',
-              $product->get_description()
-            );
-            ?>
-          </div>
-        <?php endif; ?>
-
         <!-- =====================
              ADD TO CART
         ====================== -->
@@ -193,6 +181,18 @@ if ( ! $product ) return;
         <?php else : ?>
           <div class="alert alert-secondary mt-4">
             Sản phẩm hiện không khả dụng
+          </div>
+        <?php endif; ?>
+
+        <!-- SHORT DESCRIPTION -->
+        <?php if ( $product->get_description() ) : ?>
+          <div class="text-muted mb-4 small">
+            <?php
+            echo apply_filters(
+              'the_content',
+              $product->get_description()
+            );
+            ?>
           </div>
         <?php endif; ?>
 
