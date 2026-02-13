@@ -9,6 +9,7 @@ $args = [
     'meta_key'       => '_price',
     'orderby'        => 'meta_value_num',
     'order'          => 'ASC',
+    'post_status'    => 'publish',
 
     'tax_query'      => [
         [
