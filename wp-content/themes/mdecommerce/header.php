@@ -121,6 +121,14 @@
             text-decoration: underline;
         }
 
+        .navbar-toggler {
+            border-color: #c9c9c9;
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
     </style>
 
     <?php wp_head(); ?>
@@ -160,7 +168,7 @@
             </a>
 
             <!-- Toggle button (mobile) -->
-            <button class="navbar-toggler" type="button"
+            <button class="navbar-toggler px-2" type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#mainNavbar"
                     aria-controls="mainNavbar"
