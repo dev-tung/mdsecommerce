@@ -130,6 +130,10 @@ $chunked = array_chunk($items, $perCol);
         Bảng giá căng cước vợt cầu lông
     </h1>
 
+    <p class="text-center text-danger mb-4">
+        <i>Căng xong – Nếu đứt trong 3 ngày đầu, các bác chụp ảnh lại trước khi cắt, mang ra em được căng lại miễn phí.</i>
+    </p>
+
     <div class="row g-3">
         <?php foreach ($chunked as $col) : ?>
             <div class="col-12 col-sm-6 col-md-4 d-flex flex-column gap-3">
