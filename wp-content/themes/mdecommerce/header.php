@@ -3,390 +3,452 @@
 
 <head>
 
-   <meta charset="<?php bloginfo('charset'); ?>">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="<?php bloginfo('charset'); ?>">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-   <title>
-      <?php bloginfo('name'); ?> <?php wp_title('|'); ?>
-   </title>
+<title>
+<?php bloginfo('name'); ?> <?php wp_title('|'); ?>
+</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-   <style>
+<style>
 
-      /* ================= BODY ================= */
+/* ================= BODY ================= */
 
-      body {
-         background: #f2f4f7;
-      }
+body{
+background:#f2f4f7;
+}
 
-      /* ================= SITE HEADER ================= */
+/* ================= SITE HEADER ================= */
 
-      .site-header {
-         background: #69A84F;
-         color: #fff;
-      }
+.site-header{
+background:#69A84F;
+color:#fff;
+}
 
-      /* ================= MAIN HEADER ================= */
+.header__banner{
+  background: linear-gradient(90deg, #A5CE1E, #69A84F, #A5CE1E);
+}
 
-      .site-header__main {
-         padding: 12px 0;
-      }
+.header__banner-text{
+  font-size:24px;
+  font-weight:500;  
+  padding: 10px;
+}
 
-      /* ================= LOGO ================= */
+/* ================= MAIN HEADER ================= */
 
-      .site-header__logo img {
-         display: block;
-      }
+.site-header__main{
+padding:12px 0;
+}
 
-      /* ================= SEARCH ================= */
+/* ================= LOGO ================= */
 
-      .site-header__search .input-group {
-         background: #fff;
-         border-radius: 6px;
-         overflow: hidden;
-      }
+.site-header__logo img{
+  width: 120px;
+display:block;
+}
 
-      .site-header__search-input {
-         border: none;
-         box-shadow: none;
-      }
+/* ================= SEARCH ================= */
 
-      .site-header__search-input:focus {
-         box-shadow: none;
-      }
+.site-header__search .input-group{
+background:#fff;
+border-radius:6px;
+overflow:hidden;
+}
 
-      .site-header__search-btn {
-         background: #fff;
-         border: none;
-         color: #69A84F;
-         padding: 0 16px;
-      }
+.site-header__search-input{
+border:none;
+box-shadow:none;
+}
 
-      /* ================= ACTIONS ================= */
+.site-header__search-input:focus{
+box-shadow:none;
+}
 
-      .site-header__actions {
-         display: flex;
-         justify-content: flex-end;
-         align-items: center;
-         gap: 20px;
-      }
+.site-header__search-btn{
+background:#fff;
+border:none;
+color:#69A84F;
+padding:0 16px;
+}
 
-      .site-header__action {
-         display: flex;
-         align-items: center;
-         gap: 6px;
-         color: #fff;
-         text-decoration: none;
-      }
+/* ================= ACTIONS ================= */
 
-      .site-header__action i {
-         font-size: 18px;
-         width: 18px;
-      }
+.site-header__actions{
+display:flex;
+justify-content:flex-end;
+align-items:center;
+gap:20px;
+}
 
-      /* ================= MENU ================= */
+.site-header__action{
+display:flex;
+align-items:center;
+gap:6px;
+color:#fff;
+text-decoration:none;
+}
 
-      .site-header__menu {
-         display: flex;
-         gap: 30px;
-      }
+.site-header__action i{
+font-size:18px;
+width:auto;
+}
 
-      .site-header__menu-item {
-         display: flex;
-         align-items: center;
-         gap: 6px;
-         padding: 10px 0;
-         color: #fff;
-         text-decoration: none;
-         font-weight: 500;
-      }
+/* ================= MENU ================= */
 
-      .site-header__menu-item:hover {
-         background: rgba(255,255,255,0.15);
-         border-radius: 4px;
-      }
+.site-header__menu{
+display:flex;
+gap:30px;
+}
 
-      /* ================= MOBILE MENU ================= */
+.site-header__menu-item{
+display:flex;
+align-items:center;
+gap:6px;
+padding:10px 0;
+color:#fff;
+text-decoration:none;
+font-weight:500;
+}
 
-      .site-header__menu-toggle {
-         font-size: 28px;
-         color: #fff;
-         cursor: pointer;
-      }
+.site-header__menu-item:hover{
+background:rgba(255,255,255,0.15);
+border-radius:4px;
+}
 
-      .site-header__mobile-item {
-         display: flex;
-         align-items: center;
-         gap: 10px;
-         padding: 12px 0;
-         text-decoration: none;
-         color: #333;
-         font-weight: 500;
-         border-bottom: 1px solid #eee;
-      }
+/* ================= MOBILE MENU ================= */
 
-      .site-header__mobile-item i {
-         width: 20px;
-      }
+.mobile-header-actions .site-header__menu-toggle{
+font-size:28px;
+color:#fff;
+cursor:pointer;
+}
 
-      /* ================= FLOAT CONTACT ================= */
+.site-header__mobile-item{
+display:flex;
+align-items:center;
+gap:10px;
+padding:12px 0;
+text-decoration:none;
+color:#333;
+font-weight:500;
+border-bottom:1px solid #eee;
+}
 
-      .float-contact {
-         position: fixed;
-         right: 20px;
-         width: 56px;
-         height: 56px;
-         border-radius: 50%;
-         background: #69A84F;
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         z-index: 9999;
-      }
+.site-header__mobile-item i{
+width:20px;
+}
 
-      .float-contact--zalo {
-         bottom: 70px;
-      }
+/* ================= FLOAT CONTACT ================= */
 
-      .float-contact--phone {
-         bottom: 140px;
-      }
+.float-contact{
+position:fixed;
+right:20px;
+width:56px;
+height:56px;
+border-radius:50%;
+background:#69A84F;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
 
-      .float-contact img {
-         width: 30px;
-      }
+.float-contact--zalo{
+bottom:70px;
+}
 
-      /* ================= RESPONSIVE ================= */
+.float-contact--phone{
+bottom:140px;
+}
 
-      @media (max-width: 992px) {
+.float-contact img{
+width:30px;
+}
 
-         .site-header__menu {
-            display: none;
-         }
+/* ================= MOBILE HEADER FIX ================= */
 
-      }
+.mobile-header-actions{
+display:none;
+}
 
-   </style>
 
-   <?php wp_head(); ?>
+@media (max-width: 992px){
+.site-header__logo img{
+  width: 100px;
+display:block;
+}
+
+.site-header__menu{
+display:none;
+}
+
+/* logo + icon row */
+
+.logo-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+width:100%;
+}
+
+/* icon group */
+
+.mobile-header-actions{
+display:flex;
+align-items:center;
+gap:16px;
+}
+
+.mobile-header-actions i{
+font-size:23px;
+}
+
+/* search xuống dưới */
+
+.search-row{
+width:100%;
+margin-top:10px;
+}
+
+}
+
+
+</style>
+
+<?php wp_head(); ?>
 
 </head>
 
 
 <body <?php body_class(); ?>>
 
-   <!-- FLOAT CONTACT -->
+<!-- FLOAT CONTACT -->
 
-   <a href="https://zalo.me/0966628838"
-      class="float-contact float-contact--zalo"
-      target="_blank">
+<a href="https://zalo.me/0966628838"
+class="float-contact float-contact--zalo"
+target="_blank">
 
-      <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg">
 
-   </a>
+</a>
 
 
-   <a href="tel:0973359165"
-      class="float-contact float-contact--phone">
+<a href="tel:0973359165"
+class="float-contact float-contact--phone">
 
-      <svg xmlns="http://www.w3.org/2000/svg"
-           width="28"
-           height="28"
-           fill="#fff"
-           viewBox="0 0 16 16">
+<svg xmlns="http://www.w3.org/2000/svg"
+width="28"
+height="28"
+fill="#fff"
+viewBox="0 0 16 16">
 
-         <path d="M3.654 1.328a.678.678 0 0 1 .737-.054l2.522 1.515c.329.197.445.62.27.977l-1.013 2.027a.678.678 0 0 0 .145.788l2.457 2.457a.678.678 0 0 0 .788.145l2.027-1.013a.678.678 0 0 1 .977.27l1.515 2.522a.678.678 0 0 1-.054.737l-1.318 1.318c-.89.89-2.216 1.108-3.262.544a18.634 18.634 0 0 1-7.12-7.12c-.564-1.046-.346-2.372.544-3.262L3.654 1.328z"/>
+<path d="M3.654 1.328a.678.678 0 0 1 .737-.054l2.522 1.515c.329.197.445.62.27.977l-1.013 2.027a.678.678 0 0 0 .145.788l2.457 2.457a.678.678 0 0 0 .788.145l2.027-1.013a.678.678 0 0 1 .977.27l1.515 2.522a.678.678 0 0 1-.054.737l-1.318 1.318c-.89.89-2.216 1.108-3.262.544a18.634 18.634 0 0 1-7.12-7.12c-.564-1.046-.346-2.372.544-3.262L3.654 1.328z"/>
 
-      </svg>
+</svg>
 
-   </a>
+</a>
 
 
-   <!-- HEADER -->
+<!-- HEADER -->
 
-   <header class="site-header">
+<header class="site-header">
 
-      <div class="site-header__main">
+<!-- ===== TOP BANNER ===== -->
 
-         <div class="container">
+<div class="header__banner text-center">
 
-            <div class="row align-items-center">
+    <h3 class="header__banner-text">Giày 65Z4 đã về shop rồi, CÁC LÔNG THỦ ƠI !!!</h3>
 
-               <!-- LOGO -->
+</div>
 
-               <div class="col-4 col-lg-3">
+<div class="site-header__main">
 
-                  <a href="<?php echo home_url(); ?>"
-                     class="site-header__logo">
+<div class="container">
 
-                     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo.png"
-                          width="120"
-                          alt="Logo">
+<div class="row align-items-center">
 
-                  </a>
+<!-- LOGO + MOBILE ICON -->
 
-               </div>
+<div class="col-12 col-lg-3 logo-row">
 
+<a href="<?php echo home_url(); ?>"
+class="site-header__logo">
 
-               <!-- SEARCH -->
+<img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo.png"
+alt="Logo">
 
-               <div class="col-8 col-lg-6">
+</a>
 
-                  <form role="search"
-                        method="get"
-                        action="<?php echo home_url('/'); ?>"
-                        class="site-header__search">
+<div class="mobile-header-actions d-lg-none">
 
-                     <div class="input-group">
+<a href="<?php echo wc_get_cart_url(); ?>"
+class="site-header__action">
 
-                        <input
-                           type="text"
-                           name="s"
-                           class="form-control site-header__search-input"
-                           placeholder="Tìm vợt cầu lông..."
-                           value="<?php echo get_search_query(); ?>">
+<i class="bi bi-cart"></i>
 
-                        <button class="btn site-header__search-btn">
+</a>
 
-                           <i class="bi bi-search"></i>
+<i class="bi bi-list site-header__menu-toggle"
+data-bs-toggle="offcanvas"
+data-bs-target="#mobileMenu"></i>
 
-                        </button>
+</div>
 
-                     </div>
+</div>
 
-                  </form>
 
-               </div>
+<!-- SEARCH -->
 
+<div class="col-12 col-lg-6 search-row">
 
-               <!-- CART -->
+<form role="search"
+method="get"
+action="<?php echo home_url('/'); ?>"
+class="site-header__search">
 
-               <div class="col-lg-3 d-none d-lg-block">
+<div class="input-group">
 
-                  <div class="site-header__actions">
+<input
+type="text"
+name="s"
+class="form-control site-header__search-input"
+placeholder="Giày 65Z4 VA..."
+value="<?php echo get_search_query(); ?>">
 
-                     <a href="<?php echo wc_get_cart_url(); ?>"
-                        class="site-header__action">
+<button class="btn site-header__search-btn">
 
-                        <i class="bi bi-cart"></i>
-                        Giỏ hàng
+<i class="bi bi-search"></i>
 
-                     </a>
+</button>
 
-                  </div>
+</div>
 
-               </div>
+</form>
 
-            </div>
+</div>
 
-         </div>
 
-      </div>
+<!-- CART DESKTOP -->
 
+<div class="col-lg-3 d-none d-lg-block">
 
-      <!-- MENU -->
+<div class="site-header__actions">
 
-      <div class="container">
+<a href="<?php echo wc_get_cart_url(); ?>"
+class="site-header__action">
 
-         <div class="d-flex justify-content-between align-items-center">
+<i class="bi bi-cart"></i>
+Giỏ hàng
 
-            <div class="site-header__menu">
+</a>
 
-               <a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__menu-item">
-                  <i class="bi bi-lightning-charge"></i> Vợt cầu lông
-               </a>
+</div>
 
-               <a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__menu-item">
-                  <i class="bi bi-person-walking"></i> Giày cầu lông
-               </a>
+</div>
 
-               <a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__menu-item">
-                  <i class="bi bi-tshirt"></i> Quần áo
-               </a>
+</div>
 
-               <a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__menu-item">
-                  <i class="bi bi-bag"></i> Túi vợt
-               </a>
+</div>
 
-               <a href="<?php echo home_url('/string'); ?>" class="site-header__menu-item">
-                  <i class="bi bi-link-45deg"></i> Dây căng
-               </a>
+</div>
 
-               <a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__menu-item">
-                  <i class="bi bi-gear"></i> Phụ kiện
-               </a>
 
-               <a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__menu-item">
-                  <i class="bi bi-journal-text"></i> Blog
-               </a>
+<!-- MENU -->
 
-            </div>
+<div class="container">
 
+<div class="d-flex justify-content-between align-items-center">
 
-            <div class="d-lg-none">
+<div class="site-header__menu">
 
-               <i class="bi bi-list site-header__menu-toggle"
-                  data-bs-toggle="offcanvas"
-                  data-bs-target="#mobileMenu"></i>
+<a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__menu-item">
+Vợt cầu lông
+</a>
 
-            </div>
+<a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__menu-item">
+Giày cầu lông
+</a>
 
-         </div>
+<a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__menu-item">
+Quần áo
+</a>
 
-      </div>
+<a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__menu-item">
+Túi vợt
+</a>
 
-   </header>
+<a href="<?php echo home_url('/string'); ?>" class="site-header__menu-item">
+Dây căng
+</a>
 
+<a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__menu-item">
+Phụ kiện
+</a>
 
-   <!-- MOBILE MENU -->
+<a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__menu-item">
+Blog
+</a>
 
-   <div class="offcanvas offcanvas-end"
-        tabindex="-1"
-        id="mobileMenu">
+</div>
 
-      <div class="offcanvas-header">
+</div>
 
-         <h5>Danh mục</h5>
+</div>
 
-         <button type="button"
-                 class="btn-close"
-                 data-bs-dismiss="offcanvas"></button>
+</header>
 
-      </div>
 
+<!-- MOBILE MENU -->
 
-      <div class="offcanvas-body">
+<div class="offcanvas offcanvas-end"
+tabindex="-1"
+id="mobileMenu">
 
-         <a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__mobile-item">
-            <i class="bi bi-lightning-charge"></i> Vợt cầu lông
-         </a>
+<div class="offcanvas-header">
 
-         <a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__mobile-item">
-            <i class="bi bi-person-walking"></i> Giày cầu lông
-         </a>
+<h5>Danh mục</h5>
 
-         <a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__mobile-item">
-            <i class="bi bi-tshirt"></i> Quần áo
-         </a>
+<button type="button"
+class="btn-close"
+data-bs-dismiss="offcanvas"></button>
 
-         <a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__mobile-item">
-            <i class="bi bi-bag"></i> Túi vợt
-         </a>
+</div>
 
-         <a href="<?php echo home_url('/string'); ?>" class="site-header__mobile-item">
-            <i class="bi bi-link-45deg"></i> Dây căng
-         </a>
 
-         <a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__mobile-item">
-            <i class="bi bi-gear"></i> Phụ kiện
-         </a>
+<div class="offcanvas-body">
 
-         <a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__mobile-item">
-            <i class="bi bi-journal-text"></i> Blog
-         </a>
+<a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__mobile-item">
+Vợt cầu lông
+</a>
 
-      </div>
+<a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__mobile-item">
+Giày cầu lông
+</a>
 
-   </div>
+<a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__mobile-item">
+Quần áo
+</a>
+
+<a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__mobile-item">
+Túi vợt
+</a>
+
+<a href="<?php echo home_url('/string'); ?>" class="site-header__mobile-item">
+Dây căng
+</a>
+
+<a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__mobile-item">
+Phụ kiện
+</a>
+
+<a href="<?php echo home_url('/cua-hang'); ?>" class="site-header__mobile-item">
+Blog
+</a>
+
+</div>
+
+</div>
