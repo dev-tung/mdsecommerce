@@ -321,25 +321,55 @@ Giỏ hàng
 
 <div class="site-header__menu">
 
-<a href="<?php echo home_url('/danh-muc-san-pham/vot-cau-long'); ?>" class="site-header__menu-item <?php if(strpos($current_url,'vot-cau-long')!==false) echo 'active'; ?>">Vợt cầu lông</a>
+<a href="<?php echo home_url('/danh-muc-san-pham/vot-cau-long'); ?>" 
+class="site-header__menu-item <?php if(is_product_category('vot-cau-long')) echo 'active'; ?>">
+Vợt cầu lông
+</a>
 
-<a href="<?php echo home_url('/danh-muc-san-pham/giay-cau-long'); ?>" class="site-header__menu-item <?php if(strpos($current_url,'giay-cau-long')!==false) echo 'active'; ?>">Giày cầu lông</a>
+<a href="<?php echo home_url('/danh-muc-san-pham/giay-cau-long'); ?>" 
+class="site-header__menu-item <?php if(is_product_category('giay-cau-long')) echo 'active'; ?>">
+Giày cầu lông
+</a>
 
-<a href="<?php echo home_url('/danh-muc-san-pham/ao-cau-long'); ?>" class="site-header__menu-item <?php if(strpos($current_url,'ao-cau-long')!==false) echo 'active'; ?>">Áo cầu lông</a>
+<a href="<?php echo home_url('/danh-muc-san-pham/ao-cau-long'); ?>" 
+class="site-header__menu-item <?php if(is_product_category('ao-cau-long')) echo 'active'; ?>">
+Áo cầu lông
+</a>
 
-<a href="<?php echo home_url('/danh-muc-san-pham/quan-cau-long'); ?>" class="site-header__menu-item <?php if(strpos($current_url,'quan-cau-long')!==false) echo 'active'; ?>">Quần cầu lông</a>
+<a href="<?php echo home_url('/danh-muc-san-pham/quan-cau-long'); ?>" 
+class="site-header__menu-item <?php if(is_product_category('quan-cau-long')) echo 'active'; ?>">
+Quần cầu lông
+</a>
 
-<a href="<?php echo home_url('/danh-muc-san-pham/bao-vot-cau-long'); ?>" class="site-header__menu-item <?php if(strpos($current_url,'bao-vot-cau-long')!==false) echo 'active'; ?>">Bao vợt</a>
+<a href="<?php echo home_url('/danh-muc-san-pham/bao-vot-cau-long'); ?>" 
+class="site-header__menu-item <?php if(is_product_category('bao-vot-cau-long')) echo 'active'; ?>">
+Bao vợt
+</a>
 
-<a href="<?php echo home_url('/danh-muc-san-pham/balo-vot-cau-long'); ?>" class="site-header__menu-item <?php if(strpos($current_url,'balo-vot-cau-long')!==false) echo 'active'; ?>">Balo</a>
+<a href="<?php echo home_url('/danh-muc-san-pham/balo-vot-cau-long'); ?>" 
+class="site-header__menu-item <?php if(is_product_category('balo-vot-cau-long')) echo 'active'; ?>">
+Balo
+</a>
 
-<a href="<?php echo home_url('/danh-muc-san-pham/hop-cau-long'); ?>" class="site-header__menu-item <?php if(strpos($current_url,'hop-cau-long')!==false) echo 'active'; ?>">Hộp cầu lông</a>
+<a href="<?php echo home_url('/danh-muc-san-pham/hop-cau-long'); ?>" 
+class="site-header__menu-item <?php if(is_product_category('hop-cau-long')) echo 'active'; ?>">
+Hộp cầu lông
+</a>
 
-<a href="<?php echo home_url('/string'); ?>" class="site-header__menu-item <?php if(strpos($current_url,'string')!==false) echo 'active'; ?>">Dây căng</a>
+<a href="<?php echo home_url('/string'); ?>" 
+class="site-header__menu-item <?php if(is_page('string')) echo 'active'; ?>">
+Dây căng
+</a>
 
-<a href="<?php echo home_url('/danh-muc-san-pham/phu-kien-cau-long'); ?>" class="site-header__menu-item <?php if(strpos($current_url,'phu-kien-cau-long')!==false) echo 'active'; ?>">Phụ kiện khác</a>
+<a href="<?php echo home_url('/danh-muc-san-pham/phu-kien-cau-long'); ?>" 
+class="site-header__menu-item <?php if(is_product_category('phu-kien-cau-long')) echo 'active'; ?>">
+Phụ kiện khác
+</a>
 
-<a href="<?php echo home_url('/category/blog/'); ?>" class="site-header__menu-item <?php if(strpos($current_url,'blog')!==false) echo 'active'; ?>">Tin tức</a>
+<a href="<?php echo home_url('/category/blog/'); ?>" 
+class="site-header__menu-item <?php if(is_category('blog')) echo 'active'; ?>">
+Tin tức
+</a>
 
 </div>
 
