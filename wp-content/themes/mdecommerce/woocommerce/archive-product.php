@@ -43,6 +43,11 @@
     font-weight:600;
     border-radius:0;
 }
+
+.button-buy:hover{
+    background:#5c9645;
+    color:white;
+}
 .btn-buy:hover{
     background:#5c9645;
 }
@@ -352,7 +357,7 @@ $image = has_post_thumbnail()
                 <div class="price-sale mb-2"><?= wc_price($regular); ?></div>
             <?php endif; ?>
 
-            <a href="<?= esc_url(get_permalink()); ?>" class="btn btn-buy btn-sm w-100 mt-auto">
+            <a href="<?= esc_url(get_permalink()); ?>" class="btn button-buy btn-sm w-100 mt-auto">
                 Xem chi tiết
             </a>
         </div>
