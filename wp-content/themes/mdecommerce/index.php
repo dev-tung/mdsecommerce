@@ -262,19 +262,11 @@
 
 <?php
 
-$args_vot = [
+$args_sale = [
 
 'post_type' => 'product',
 'posts_per_page' => 6,
 'post_status' => 'publish',
-
-'tax_query' => [
-[
-'taxonomy' => 'product_cat',
-'field' => 'slug',
-'terms' => 'vot-cau-long',
-]
-],
 
 'meta_query' => [
 [
@@ -287,9 +279,9 @@ $args_vot = [
 
 ];
 
-$query_vot = new WP_Query($args_vot);
+$query_sale = new WP_Query($args_sale);
 
-if ($query_vot->have_posts()) :
+if ($query_sale->have_posts()) :
 
 ?>
 
@@ -297,30 +289,35 @@ if ($query_vot->have_posts()) :
 
 <div class="container">
 
-<h4 class="fw-bold mb-4">Vợt cầu lông khuyến mãi</h4>
+<h4 class="fw-bold mb-4">Sản phẩm khuyến mãi</h4>
 
 <div class="product-grid">
 
-
-<?php while ($query_vot->have_posts()) : $query_vot->the_post();
+<?php while ($query_sale->have_posts()) : $query_sale->the_post();
 
 $product = wc_get_product(get_the_ID());
 if(!$product) continue;
 
-$image_url = get_the_post_thumbnail_url(get_the_ID(),'woocommerce_thumbnail') ?: wc_placeholder_img_src();
+$image_url = get_the_post_thumbnail_url(
+get_the_ID(),
+'woocommerce_thumbnail'
+) ?: wc_placeholder_img_src();
 
 ?>
 
-
 <div class="product-card h-100">
 
-<img src="<?php echo esc_url($image_url); ?>"
+<img
+src="<?php echo esc_url($image_url); ?>"
 class="product-card__img"
-alt="<?php the_title(); ?>">
+alt="<?php the_title(); ?>"
+>
 
 <div class="card-body text-center d-flex flex-column p-2">
 
-<h6 class="product-card__title"><?php the_title(); ?></h6>
+<h6 class="product-card__title">
+<?php the_title(); ?>
+</h6>
 
 <?php if ($product->get_regular_price()) : ?>
 
@@ -341,114 +338,6 @@ Xem chi tiết
 </div>
 
 </div>
-
-
-<?php endwhile; ?>
-
-</div>
-
-
-<div class="text-center mt-4">
-
-<a href="<?php echo home_url('/cua-hang'); ?>" class="btn button-buy">
-
-Xem thêm sản phẩm
-
-<i class="bi bi-chevron-right button-buy__icon"></i>
-
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<?php endif; wp_reset_postdata(); ?>
-
-
-<?php
-
-$args_giay = [
-
-'post_type' => 'product',
-'posts_per_page' => 6,
-'post_status' => 'publish',
-
-'tax_query' => [
-[
-'taxonomy' => 'product_cat',
-'field' => 'slug',
-'terms' => 'giay-cau-long',
-]
-],
-
-'meta_query' => [
-[
-'key' => '_sale_price',
-'value' => 0,
-'compare' => '>',
-'type' => 'NUMERIC'
-]
-]
-
-];
-
-$query_giay = new WP_Query($args_giay);
-
-if ($query_giay->have_posts()) :
-
-?>
-
-<section class="py-5 bg-light">
-
-<div class="container">
-
-<h4 class="fw-bold mb-4">Giày cầu lông khuyến mãi</h4>
-
-<div class="product-grid">
-
-
-<?php while ($query_giay->have_posts()) : $query_giay->the_post();
-
-$product = wc_get_product(get_the_ID());
-if(!$product) continue;
-
-$image_url = get_the_post_thumbnail_url(get_the_ID(),'woocommerce_thumbnail') ?: wc_placeholder_img_src();
-
-?>
-
-
-<div class="product-card h-100">
-
-<img src="<?php echo esc_url($image_url); ?>"
-class="product-card__img"
-alt="<?php the_title(); ?>">
-
-<div class="card-body text-center d-flex flex-column p-2">
-
-<h6 class="product-card__title"><?php the_title(); ?></h6>
-
-<?php if ($product->get_regular_price()) : ?>
-
-<div class="product-card__price-old">
-<?php echo wc_price($product->get_regular_price()); ?>
-</div>
-
-<?php endif; ?>
-
-<div class="product-card__price-sale mb-2">
-<?php echo wc_price($product->get_sale_price()); ?>
-</div>
-
-<a href="<?php the_permalink(); ?>" class="btn button-buy btn-sm mt-auto">
-Xem chi tiết
-</a>
-
-</div>
-
-</div>
-
 
 <?php endwhile; ?>
 
