@@ -343,7 +343,7 @@ clickable:true
 });
 
 new Swiper('.saleSwiper',{
-slidesPerView:6,
+slidesPerView:5,
 spaceBetween:16,
 loop:true,
 autoplay:{
@@ -354,7 +354,7 @@ breakpoints:{
 0:{slidesPerView:2},
 768:{slidesPerView:3},
 992:{slidesPerView:4},
-1200:{slidesPerView:5}
+1200:{slidesPerView:6}
 }
 });
 
