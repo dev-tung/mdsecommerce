@@ -22,6 +22,9 @@
 .product-card__img{
     height:200px;
     object-fit:cover;
+    width:100%;
+    display:block;
+    margin:0 auto;
 }
 
 .product-card__title{
@@ -72,16 +75,10 @@
     gap:16px;
 }
 
-@media (max-width:1200px){
-    .product-grid{grid-template-columns:repeat(4,1fr);}
-}
+/* ================= SALE SLIDER ================= */
 
-@media (max-width:992px){
-    .product-grid{grid-template-columns:repeat(3,1fr);}
-}
-
-@media (max-width:576px){
-    .product-grid{grid-template-columns:repeat(2,1fr);}
+.saleSwiper .swiper-slide{
+    height:auto;
 }
 
 /* ================= SLIDER ================= */
@@ -167,87 +164,47 @@
 
 <div class="swiper-wrapper">
 
-
 <!-- Slide 1 -->
-
 <div class="swiper-slide">
-
 <div class="slide-content">
-
 <div class="slide-text">
-
 <h2>Shop Cầu Lông Chính Hãng</h2>
-
 <p>Vợt, giày, quần áo và phụ kiện cầu lông chất lượng cao.</p>
-
 <a href="/cua-hang">Xem sản phẩm</a>
-
 </div>
-
 <div class="slide-image">
-
 <img src="https://qvbadminton.com/wp-content/uploads/2024/11/alt-lin-dan-thi-dau-voi-phong-thai-tu-tin-0f4668c8.webp">
-
 </div>
-
 </div>
-
 </div>
-
 
 <!-- Slide 2 -->
-
 <div class="swiper-slide">
-
 <div class="slide-content">
-
 <div class="slide-text">
-
 <h2>Ưu Đãi Cầu Lông Mỗi Ngày</h2>
-
 <p>Giảm giá vợt cầu lông, giày thi đấu và rất nhiều các phụ kiện.</p>
-
 <a href="/cua-hang">Mua ngay</a>
-
 </div>
-
 <div class="slide-image">
-
 <img src="https://cdn.shopvnb.com/uploads/images/tin_tuc/lindan-vs-lee-chong-wei-top-5-tran-dau-dang-cap-cua-ky-phung-dich-thu-2.webp">
-
 </div>
-
 </div>
-
 </div>
-
 
 <!-- Slide 3 -->
-
 <div class="swiper-slide">
-
 <div class="slide-content">
-
 <div class="slide-text">
-
 <h2>Đồng Hành Cùng Người Chơi Cầu Lông</h2>
-
 <p>Tư vấn chọn vợt phù hợp – giao hàng nhanh toàn quốc.</p>
-
 <a href="/cua-hang">Khám phá ngay</a>
-
 </div>
-
 <div class="slide-image">
-
 <img src="https://www.badmintonplanet.com/wp-content/uploads/2016/05/05-13-2016-badminton-news-lee-chong-wei.jpg">
-
 </div>
-
 </div>
-
 </div>
-
 
 </div>
 
@@ -263,11 +220,9 @@
 <?php
 
 $args_sale = [
-
 'post_type' => 'product',
-'posts_per_page' => 6,
+'posts_per_page' => 10,
 'post_status' => 'publish',
-
 'meta_query' => [
 [
 'key' => '_sale_price',
@@ -276,7 +231,6 @@ $args_sale = [
 'type' => 'NUMERIC'
 ]
 ]
-
 ];
 
 $query_sale = new WP_Query($args_sale);
@@ -291,7 +245,9 @@ if ($query_sale->have_posts()) :
 
 <h4 class="fw-bold mb-4">Sản phẩm khuyến mãi</h4>
 
-<div class="product-grid">
+<div class="swiper saleSwiper">
+
+<div class="swiper-wrapper">
 
 <?php while ($query_sale->have_posts()) : $query_sale->the_post();
 
@@ -304,6 +260,8 @@ get_the_ID(),
 ) ?: wc_placeholder_img_src();
 
 ?>
+
+<div class="swiper-slide">
 
 <div class="product-card h-100">
 
@@ -339,10 +297,13 @@ Xem chi tiết
 
 </div>
 
+</div>
+
 <?php endwhile; ?>
 
 </div>
 
+</div>
 
 <div class="text-center mt-4">
 
@@ -370,19 +331,31 @@ Xem thêm sản phẩm
 <script>
 
 new Swiper('.homeSwiper',{
-
 loop:true,
-
 autoplay:{
 delay:3000,
 disableOnInteraction:false
 },
-
 pagination:{
 el:'.swiper-pagination',
 clickable:true
 }
+});
 
+new Swiper('.saleSwiper',{
+slidesPerView:5,
+spaceBetween:16,
+loop:true,
+autoplay:{
+delay:2500,
+disableOnInteraction:false
+},
+breakpoints:{
+0:{slidesPerView:2},
+768:{slidesPerView:3},
+992:{slidesPerView:4},
+1200:{slidesPerView:5}
+}
 });
 
 </script>
