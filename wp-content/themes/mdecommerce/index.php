@@ -343,7 +343,7 @@ clickable:true
 });
 
 new Swiper('.saleSwiper',{
-slidesPerView:5,
+slidesPerView:6,
 spaceBetween:16,
 loop:true,
 autoplay:{
