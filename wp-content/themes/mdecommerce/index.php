@@ -50,9 +50,9 @@
 /* ================= BUTTON ================= */
 
 .button-buy{
-    background: #f1f8fe;
+    background:#f1f8fe;
     border:1px solid #f1f8fe;
-    color: #4b8b2f;
+    color:#4b8b2f;
     font-weight:600;
     border-radius:0;
 }
@@ -65,14 +65,6 @@
 .button-buy__icon{
     font-size:11px;
     margin-left:4px;
-}
-
-/* ================= PRODUCT GRID ================= */
-
-.product-grid{
-    display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:16px;
 }
 
 /* ================= SALE SLIDER ================= */
