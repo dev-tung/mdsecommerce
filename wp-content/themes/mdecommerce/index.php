@@ -265,7 +265,7 @@
 $args_sale = [
 
 'post_type' => 'product',
-'posts_per_page' => 6,
+'posts_per_page' => 12,
 'post_status' => 'publish',
 
 'meta_query' => [
