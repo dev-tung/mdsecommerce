@@ -36,10 +36,10 @@
 }
 
 /* ================= BUTTON ================= */
-.btn-buy{
-    background:#69A84F;
-    border:1px solid #69A84F;
-    color:#fff;
+.button-buy{
+    background: #f1f8fe;
+    border:1px solid #f1f8fe;
+    color: #4b8b2f;
     font-weight:600;
     border-radius:0;
 }
