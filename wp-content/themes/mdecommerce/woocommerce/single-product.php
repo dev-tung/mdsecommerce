@@ -115,9 +115,28 @@ border-radius:8px;
 padding:20px;
 box-shadow:0 2px 8px rgba(0,0,0,0.05);
 }
+
+/* ===== BREADCRUMB ===== */
+
+.woocommerce-breadcrumb{
+font-size:14px;
+margin-bottom:10px;
+color:#666;
+}
+
+.woocommerce-breadcrumb a{
+color:#0d6efd;
+text-decoration:none;
+}
+
+.woocommerce-breadcrumb a:hover{
+text-decoration:underline;
+}
 </style>
 
 <div class="container py-4">
+
+<?php woocommerce_breadcrumb(); ?>
 
 <h1 class="product-title">
 <?php the_title(); ?>
