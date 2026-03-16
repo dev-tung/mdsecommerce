@@ -57,10 +57,11 @@ border-radius:6px;
 margin-bottom:15px;
 }
 
-.promo-box ul{
-margin:0;
-padding-left:18px;
-font-size:14px;
+.promo-box ul {
+    margin: 0;
+    padding-left: 0;
+    font-size: 14px;
+    list-style: none;
 }
 
 /* ===== BUY BUTTON GROUP ===== */
@@ -99,15 +100,6 @@ background:#fb6e2e;
 color:#fff;
 }
 
-/* ===== POLICY ===== */
-
-.policy-box{
-border:1px solid #eee;
-padding:15px;
-border-radius:6px;
-font-size:14px;
-margin-top:15px;
-}
 
 </style>
 
@@ -169,11 +161,15 @@ $product->get_description()
 
 <ul>
 
-<li>Tặng quấn cán miễn phí</li>
+<li>🎁 Tặng Cước căng vợt cầu lông</li>
 
-<li>Giảm 20% dịch vụ căng dây</li>
+<li>🎁 Tặng Quấn cán vợt cầu lông</li>
 
-<li>Tư vấn chọn vợt theo lối chơi</li>
+<li>🎁 Tặng bao nhung (hoặc bao đơn) bảo vệ vợt</li>
+
+<li>📦 Nhận hàng – kiểm tra – rồi mới thanh toán</li>
+
+<li>🛡 Bảo hành 1 đổi 1 trong 90 ngày</li>
 
 </ul>
 
@@ -216,17 +212,6 @@ Mua ngay
 
 <?php endif; ?>
 
-<div class="policy-box">
-
-<div>✔ Hàng chính hãng 100%</div>
-
-<div>✔ Bảo hành theo hãng</div>
-
-<div>✔ Hỗ trợ căng dây chuẩn</div>
-
-<div>✔ Giao hàng toàn quốc</div>
-
-</div>
 
 </div>
 
