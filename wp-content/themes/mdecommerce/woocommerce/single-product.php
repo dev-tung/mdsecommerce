@@ -1,4 +1,3 @@
-
 <?php
 defined('ABSPATH') || exit;
 get_header();
@@ -57,11 +56,11 @@ border-radius:6px;
 margin-bottom:15px;
 }
 
-.promo-box ul {
-    margin: 0;
-    padding-left: 0;
-    font-size: 14px;
-    list-style: none;
+.promo-box ul{
+margin:0;
+padding-left:0;
+font-size:14px;
+list-style:none;
 }
 
 /* ===== BUY BUTTON GROUP ===== */
@@ -100,6 +99,15 @@ background:#fb6e2e;
 color:#fff;
 }
 
+/* ===== QUANTITY FIX ===== */
+
+.quantity input{
+width:70px;
+height:40px;
+text-align:center;
+border:1px solid #ddd;
+border-radius:4px;
+}
 
 </style>
 
@@ -162,13 +170,9 @@ $product->get_description()
 <ul>
 
 <li>✔ Tặng Cước căng vợt cầu lông</li>
-
 <li>✔ Tặng Quấn cán vợt cầu lông</li>
-
 <li>✔ Tặng bao nhung (hoặc bao đơn) bảo vệ vợt</li>
-
 <li>✔ Nhận hàng – kiểm tra – rồi mới thanh toán</li>
-
 <li>✔ Bảo hành 1 đổi 1 trong 90 ngày</li>
 
 </ul>
@@ -177,7 +181,7 @@ $product->get_description()
 
 <?php if($product->is_purchasable() && $product->is_in_stock()): ?>
 
-<form class="cart" method="post" action="<?php echo esc_url(wc_get_cart_url()); ?>">
+<form class="cart" method="post" enctype="multipart/form-data">
 
 <?php
 woocommerce_quantity_input([
@@ -186,12 +190,12 @@ woocommerce_quantity_input([
 ]);
 ?>
 
+<input type="hidden" name="add-to-cart" value="<?php echo esc_attr($product->get_id()); ?>">
+
 <div class="buy-group">
 
 <button
 type="submit"
-name="add-to-cart"
-value="<?php echo esc_attr($product->get_id()); ?>"
 class="add-cart"
 >
 Thêm giỏ hàng
@@ -199,9 +203,8 @@ Thêm giỏ hàng
 
 <button
 type="submit"
-name="buy-now"
-value="<?php echo esc_attr($product->get_id()); ?>"
 class="buy-now"
+data-checkout="<?php echo esc_url(wc_get_checkout_url()); ?>"
 >
 Mua ngay
 </button>
@@ -211,7 +214,6 @@ Mua ngay
 </form>
 
 <?php endif; ?>
-
 
 </div>
 
@@ -223,9 +225,21 @@ Mua ngay
 
 <script>
 
-document.querySelector('.buy-now')?.addEventListener('click',function(){
+document.addEventListener("DOMContentLoaded",function(){
 
-document.querySelector('form.cart').action='/cart/?add-to-cart=<?php echo $product->get_id(); ?>';
+const buyNow = document.querySelector(".buy-now");
+
+if(buyNow){
+
+buyNow.addEventListener("click",function(){
+
+const form = document.querySelector("form.cart");
+
+form.action = buyNow.dataset.checkout;
+
+});
+
+}
 
 });
 
