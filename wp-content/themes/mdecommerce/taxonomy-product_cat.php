@@ -1,3 +1,4 @@
+```php
 <?php get_header(); ?>
 
 <style>
@@ -85,25 +86,33 @@ color:#fff;
 
 </style>
 
-
 <section class="py-4">
 
 <div class="container">
+
+<?php woocommerce_breadcrumb(); ?>
+
+<h1 class="mb-3">
+<?php woocommerce_page_title(); ?>
+</h1>
 
 <div class="card shadow-sm border-0">
 
 <div class="card-body">
 
 <?php
-$min = $_GET['min_price'] ?? '';
-$max = $_GET['max_price'] ?? '';
+$min = isset($_GET['min_price']) ? intval($_GET['min_price']) : '';
+$max = isset($_GET['max_price']) ? intval($_GET['max_price']) : '';
 ?>
 
 <!-- ===== FILTER PRICE ===== -->
 
 <div class="price-filter">
 
-<a href="?" class="filter-btn <?php if(!$min && !$max) echo 'active'; ?>">Tất cả</a>
+<a href="<?php echo get_permalink( wc_get_page_id('shop') ); ?>"
+class="filter-btn <?php if(!$min && !$max) echo 'active'; ?>">
+Tất cả
+</a>
 
 <a href="?min_price=0&max_price=1000000"
 class="filter-btn <?php if($max==1000000) echo 'active'; ?>">
@@ -129,13 +138,38 @@ Trên 3tr
 
 <div class="row g-3">
 
-<?php if(have_posts()): ?>
+<?php
 
-<?php while(have_posts()): the_post(); ?>
+$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+
+$args = [
+'post_type' => 'product',
+'posts_per_page' => 24,
+'paged' => $paged
+];
+
+if($min || $max){
+
+$args['meta_query'][] = [
+'key' => '_price',
+'value' => [$min ?: 0, $max ?: 999999999],
+'compare' => 'BETWEEN',
+'type' => 'NUMERIC'
+];
+
+}
+
+$query = new WP_Query($args);
+
+?>
+
+<?php if($query->have_posts()): ?>
+
+<?php while($query->have_posts()): $query->the_post(); ?>
 
 <?php
 
-global $product;
+$product = wc_get_product(get_the_ID());
 
 $regular = (int)$product->get_regular_price();
 $sale = (int)$product->get_sale_price();
@@ -150,42 +184,38 @@ $image = has_post_thumbnail()
 
 <div class="product-card p-2 d-flex flex-column">
 
+<a href="<?php the_permalink(); ?>">
 <img src="<?php echo esc_url($image); ?>" class="product-img mb-2">
+</a>
 
 <h6 class="product-title text-center">
 
+<a href="<?php the_permalink(); ?>" style="text-decoration:none;color:inherit;">
 <?php the_title(); ?>
+</a>
 
 </h6>
 
 <?php if($sale): ?>
 
 <div class="text-center price-old">
-
 <?php echo wc_price($regular); ?>
-
 </div>
 
 <div class="text-center price-sale mb-2">
-
 <?php echo wc_price($sale); ?>
-
 </div>
 
 <?php else: ?>
 
 <div class="text-center price-sale mb-2">
-
 <?php echo wc_price($regular); ?>
-
 </div>
 
 <?php endif; ?>
 
 <a href="<?php the_permalink(); ?>" class="btn button-buy btn-sm mt-auto">
-
 Xem chi tiết
-
 </a>
 
 </div>
@@ -194,12 +224,26 @@ Xem chi tiết
 
 <?php endwhile; ?>
 
+<?php wp_reset_postdata(); ?>
+
+</div>
+
+<!-- ===== PAGINATION ===== -->
+
+<div class="mt-4">
+
+<?php
+echo paginate_links([
+'total' => $query->max_num_pages
+]);
+?>
+
+</div>
+
 <?php else: ?>
 
 <div class="col-12 text-center py-5">
-
 <h5>Chưa có sản phẩm</h5>
-
 </div>
 
 <?php endif; ?>
@@ -215,3 +259,4 @@ Xem chi tiết
 </section>
 
 <?php get_footer(); ?>
+```
