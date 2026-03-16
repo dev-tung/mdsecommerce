@@ -1,4 +1,3 @@
-```php
 <?php get_header(); ?>
 
 <style>
@@ -84,6 +83,50 @@ background:#5c9645;
 color:#fff;
 }
 
+/* ================= PAGINATION ================= */
+
+.nav-links{
+display:flex;
+justify-content:center;
+gap:6px;
+margin-top:30px;
+flex-wrap:wrap;
+}
+
+.page-numbers{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+min-width:36px;
+height:36px;
+padding:0 10px;
+font-size:14px;
+font-weight:500;
+color:#333;
+background:#fff;
+border:1px solid #e5e7eb;
+text-decoration:none;
+transition:all .2s;
+}
+
+.page-numbers:hover{
+background:#69A84F;
+color:#fff;
+border-color:#69A84F;
+}
+
+.page-numbers.current{
+background:#69A84F;
+color:#fff;
+border-color:#69A84F;
+font-weight:600;
+}
+
+.page-numbers.prev,
+.page-numbers.next{
+padding:0 14px;
+}
+
 </style>
 
 <section class="py-4">
@@ -103,13 +146,15 @@ color:#fff;
 <?php
 $min = isset($_GET['min_price']) ? intval($_GET['min_price']) : '';
 $max = isset($_GET['max_price']) ? intval($_GET['max_price']) : '';
+
+$current_term = get_queried_object();
 ?>
 
 <!-- ===== FILTER PRICE ===== -->
 
 <div class="price-filter">
 
-<a href="<?php echo get_permalink( wc_get_page_id('shop') ); ?>"
+<a href="<?php echo get_term_link($current_term); ?>"
 class="filter-btn <?php if(!$min && !$max) echo 'active'; ?>">
 Tất cả
 </a>
@@ -145,7 +190,14 @@ $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 $args = [
 'post_type' => 'product',
 'posts_per_page' => 24,
-'paged' => $paged
+'paged' => $paged,
+'tax_query' => [
+[
+'taxonomy' => 'product_cat',
+'field' => 'term_id',
+'terms' => $current_term->term_id
+]
+]
 ];
 
 if($min || $max){
@@ -228,13 +280,14 @@ Xem chi tiết
 
 </div>
 
-<!-- ===== PAGINATION ===== -->
-
 <div class="mt-4">
 
 <?php
 echo paginate_links([
-'total' => $query->max_num_pages
+'total' => $query->max_num_pages,
+'current' => $paged,
+'prev_text' => '‹',
+'next_text' => '›'
 ]);
 ?>
 
@@ -254,9 +307,6 @@ echo paginate_links([
 
 </div>
 
-</div>
-
 </section>
 
 <?php get_footer(); ?>
-```
