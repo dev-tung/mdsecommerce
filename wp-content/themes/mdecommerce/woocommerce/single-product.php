@@ -109,6 +109,12 @@ border:1px solid #ddd;
 border-radius:4px;
 }
 
+.product-card{
+background:#fff;
+border-radius:8px;
+padding:20px;
+box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
 </style>
 
 <div class="container py-4">
@@ -123,20 +129,28 @@ border-radius:4px;
 
 <div class="col-lg-8">
 
-<div class="product-card">
+<!-- CARD ẢNH -->
 
-<div class="product-image mb-3">
+<div class="product-card mb-3">
+
+<div class="product-image">
 
 <?php
 if(!empty($gallery)){
 $img = wp_get_attachment_image_src($gallery[0],'large');
+if($img){
 ?>
-
-<img src="<?php echo esc_url($img[0]); ?>">
-
-<?php } ?>
+<img src="<?php echo esc_url($img[0]); ?>" alt="<?php the_title(); ?>">
+<?php } } ?>
 
 </div>
+
+</div>
+
+
+<!-- CARD MÔ TẢ -->
+
+<div class="product-card">
 
 <div class="product-description">
 
