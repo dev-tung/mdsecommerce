@@ -151,30 +151,33 @@ $current_term = get_queried_object();
 ?>
 
 <!-- ===== FILTER PRICE ===== -->
+<?php
+$base_url = get_term_link($current_term);
+?>
 
 <div class="price-filter">
 
-<a href="<?php echo get_term_link($current_term); ?>"
+<a href="<?php echo esc_url($base_url); ?>"
 class="filter-btn <?php if(!$min && !$max) echo 'active'; ?>">
 Tất cả
 </a>
 
-<a href="<?php echo add_query_arg(['min_price'=>0,'max_price'=>1000000]); ?>"
+<a href="<?php echo esc_url(add_query_arg(['min_price'=>0,'max_price'=>1000000], $base_url)); ?>"
 class="filter-btn <?php if($max==1000000) echo 'active'; ?>">
 Dưới 1tr
 </a>
 
-<a href="<?php echo add_query_arg(['min_price'=>1000000,'max_price'=>2000000]); ?>"
+<a href="<?php echo esc_url(add_query_arg(['min_price'=>1000000,'max_price'=>2000000], $base_url)); ?>"
 class="filter-btn <?php if($min==1000000 && $max==2000000) echo 'active'; ?>">
 1tr - 2tr
 </a>
 
-<a href="<?php echo add_query_arg(['min_price'=>2000000,'max_price'=>3000000]); ?>"
+<a href="<?php echo esc_url(add_query_arg(['min_price'=>2000000,'max_price'=>3000000], $base_url)); ?>"
 class="filter-btn <?php if($min==2000000 && $max==3000000) echo 'active'; ?>">
 2tr - 3tr
 </a>
 
-<a href="<?php echo add_query_arg(['min_price'=>3000000]); ?>"
+<a href="<?php echo esc_url(add_query_arg(['min_price'=>3000000], $base_url)); ?>"
 class="filter-btn <?php if($min==3000000 && !$max) echo 'active'; ?>">
 Trên 3tr
 </a>
