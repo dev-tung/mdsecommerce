@@ -161,15 +161,15 @@ $product->get_description()
 
 <ul>
 
-<li>🎁 Tặng Cước căng vợt cầu lông</li>
+<li>✔ Tặng Cước căng vợt cầu lông</li>
 
-<li>🎁 Tặng Quấn cán vợt cầu lông</li>
+<li>✔ Tặng Quấn cán vợt cầu lông</li>
 
-<li>🎁 Tặng bao nhung (hoặc bao đơn) bảo vệ vợt</li>
+<li>✔ Tặng bao nhung (hoặc bao đơn) bảo vệ vợt</li>
 
-<li>📦 Nhận hàng – kiểm tra – rồi mới thanh toán</li>
+<li>✔ Nhận hàng – kiểm tra – rồi mới thanh toán</li>
 
-<li>🛡 Bảo hành 1 đổi 1 trong 90 ngày</li>
+<li>✔ Bảo hành 1 đổi 1 trong 90 ngày</li>
 
 </ul>
 
