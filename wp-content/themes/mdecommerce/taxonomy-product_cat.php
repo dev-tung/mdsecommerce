@@ -34,11 +34,12 @@ color:#fff;
 /* ================= PRODUCT CARD ================= */
 
 .product-card{
-border-radius:0;
+border-radius:6px;
 background:#fff;
-border:none;
+border:1px solid #e5e7eb;
 transition:.25s;
 height:100%;
+box-shadow:0 2px 8px rgba(0,0,0,0.04);
 }
 
 .product-card:hover{
