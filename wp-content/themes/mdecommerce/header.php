@@ -378,3 +378,56 @@ Tin tức
 </div>
 
 </header>
+
+<!-- MOBILE MENU -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu">
+
+  <div class="offcanvas-header">
+    <h5>Menu</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+
+  <div class="offcanvas-body">
+
+    <a href="<?php echo home_url('/danh-muc-san-pham/vot-cau-long'); ?>" class="site-header__mobile-item">
+      <i class="bi bi-chevron-right"></i> Vợt cầu lông
+    </a>
+
+    <a href="<?php echo home_url('/danh-muc-san-pham/giay-cau-long'); ?>" class="site-header__mobile-item">
+      <i class="bi bi-chevron-right"></i> Giày cầu lông
+    </a>
+
+    <a href="<?php echo home_url('/danh-muc-san-pham/ao-cau-long'); ?>" class="site-header__mobile-item">
+      <i class="bi bi-chevron-right"></i> Áo cầu lông
+    </a>
+
+    <a href="<?php echo home_url('/danh-muc-san-pham/quan-cau-long'); ?>" class="site-header__mobile-item">
+      <i class="bi bi-chevron-right"></i> Quần cầu lông
+    </a>
+
+    <a href="<?php echo home_url('/danh-muc-san-pham/bao-vot-cau-long'); ?>" class="site-header__mobile-item">
+      <i class="bi bi-chevron-right"></i> Bao vợt
+    </a>
+
+    <a href="<?php echo home_url('/danh-muc-san-pham/balo-vot-cau-long'); ?>" class="site-header__mobile-item">
+      <i class="bi bi-chevron-right"></i> Balo
+    </a>
+
+    <a href="<?php echo home_url('/danh-muc-san-pham/hop-cau-long'); ?>" class="site-header__mobile-item">
+      <i class="bi bi-chevron-right"></i> Hộp cầu lông
+    </a>
+
+    <a href="<?php echo home_url('/string'); ?>" class="site-header__mobile-item">
+      <i class="bi bi-chevron-right"></i> Dây căng
+    </a>
+
+    <a href="<?php echo home_url('/danh-muc-san-pham/phu-kien-cau-long'); ?>" class="site-header__mobile-item">
+      <i class="bi bi-chevron-right"></i> Phụ kiện khác
+    </a>
+
+    <a href="<?php echo home_url('/category/blog/'); ?>" class="site-header__mobile-item">
+      <i class="bi bi-chevron-right"></i> Tin tức
+    </a>
+
+  </div>
+</div>
