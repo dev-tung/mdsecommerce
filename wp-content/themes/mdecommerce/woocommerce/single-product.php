@@ -198,19 +198,28 @@ $product->get_description()
 
 </div>
 
-<div class="promo-box">
+<?php 
+$terms = get_the_terms($product->get_id(), 'product_cat');
 
-<ul>
-
-<li>✔ Tặng Cước căng vợt cầu lông</li>
-<li>✔ Tặng Quấn cán vợt cầu lông</li>
-<li>✔ Tặng bao nhung (hoặc bao đơn) bảo vệ vợt</li>
-<li>✔ Nhận hàng – kiểm tra – rồi mới thanh toán</li>
-<li>✔ Bảo hành 1 đổi 1 trong 90 ngày</li>
-
-</ul>
-
-</div>
+if ($terms) {
+    foreach ($terms as $term) {
+        if ($term->slug === 'vot-cau-long') {
+?>
+            <div class="promo-box">
+                <ul>
+                    <li>✔ Tặng Cước căng vợt cầu lông</li>
+                    <li>✔ Tặng Quấn cán vợt cầu lông</li>
+                    <li>✔ Tặng bao nhung (hoặc bao đơn) bảo vệ vợt</li>
+                    <li>✔ Nhận hàng – kiểm tra – rồi mới thanh toán</li>
+                    <li>✔ Bảo hành 1 đổi 1 trong 90 ngày</li>
+                </ul>
+            </div>
+<?php
+            break;
+        }
+    }
+}
+?>
 
 <?php if($product->is_purchasable() && $product->is_in_stock()): ?>
 
