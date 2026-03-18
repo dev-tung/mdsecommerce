@@ -192,6 +192,7 @@ $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 
 $args = [
 'post_type' => 'product',
+'post_status' => 'publish',
 'posts_per_page' => 24,
 'paged' => $paged,
 'tax_query' => [
