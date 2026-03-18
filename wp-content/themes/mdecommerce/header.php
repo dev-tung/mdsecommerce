@@ -243,7 +243,7 @@ margin-top:10px;
 <header class="site-header">
 
 <div class="header__banner text-center">
-<h3 class="header__banner-text">Giày 65Z4 đã về shop rồi, CÁC LÔNG THỦ ƠI !!!</h3>
+<h3 class="header__banner-text">Giày 65Z4 VA đã về shop rồi, CÁC LÔNG THỦ ƠI !!!</h3>
 </div>
 
 <div class="site-header__main">
