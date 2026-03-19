@@ -162,7 +162,7 @@
 <div class="slide-text">
 <h2>Giày Yonex 65Z4 VA chính hãng</h2>
 <p>Độ bám sân tốt – êm – phù hợp đánh phong trào & thi đấu. Xem review thực tế bên cạnh.</p>
-<a href="https://m.me/yourpage">Inbox để tư vấn & nhận ưu đãi</a>
+<a href="https://zalo.me/0966628838">Inbox để tư vấn & nhận ưu đãi</a>
 </div>
 <div class="slide-image">
 <iframe 
