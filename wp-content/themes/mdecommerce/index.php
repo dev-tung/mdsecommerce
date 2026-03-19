@@ -192,17 +192,37 @@ allowfullscreen>
 <?php
 
 $args_sale = [
-'post_type' => 'product',
-'posts_per_page' => 10,
-'post_status' => 'publish',
-'meta_query' => [
-[
-'key' => '_sale_price',
-'value' => 0,
-'compare' => '>',
-'type' => 'NUMERIC'
-]
-]
+    'post_type' => 'product',
+    'posts_per_page' => 10,
+    'post_status' => 'publish',
+
+    'tax_query' => [
+        'relation' => 'AND',
+
+        // Chỉ lấy vợt
+        [
+            'taxonomy' => 'product_cat',
+            'field'    => 'slug',
+            'terms'    => ['vot-cau-long'],
+        ],
+
+        // Loại bỏ bao vợt
+        [
+            'taxonomy' => 'product_cat',
+            'field'    => 'slug',
+            'terms'    => ['bao-vot-cau-long'],
+            'operator' => 'NOT IN',
+        ]
+    ],
+
+    'meta_query' => [
+        [
+            'key' => '_sale_price',
+            'value' => 0,
+            'compare' => '>',
+            'type' => 'NUMERIC'
+        ]
+    ]
 ];
 
 $query_sale = new WP_Query($args_sale);
