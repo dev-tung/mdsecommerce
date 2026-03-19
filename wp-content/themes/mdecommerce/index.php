@@ -160,40 +160,20 @@
 <div class="swiper-slide">
 <div class="slide-content">
 <div class="slide-text">
-<h2>Shop Cầu Lông Chính Hãng</h2>
-<p>Vợt, giày, quần áo và phụ kiện cầu lông chất lượng cao.</p>
-<a href="/cua-hang">Xem sản phẩm</a>
+<h2>Giày Yonex 65Z4 VA chính hãng</h2>
+<p>Độ bám sân tốt – êm – phù hợp đánh phong trào & thi đấu. Xem review thực tế bên cạnh.</p>
+<a href="https://m.me/yourpage">Inbox để tư vấn & nhận ưu đãi</a>
 </div>
 <div class="slide-image">
-<img src="https://qvbadminton.com/wp-content/uploads/2024/11/alt-lin-dan-thi-dau-voi-phong-thai-tu-tin-0f4668c8.webp">
-</div>
-</div>
-</div>
-
-<!-- Slide 2 -->
-<div class="swiper-slide">
-<div class="slide-content">
-<div class="slide-text">
-<h2>Ưu Đãi Cầu Lông Mỗi Ngày</h2>
-<p>Giảm giá vợt cầu lông, giày thi đấu và rất nhiều các phụ kiện.</p>
-<a href="/cua-hang">Mua ngay</a>
-</div>
-<div class="slide-image">
-<img src="https://cdn.shopvnb.com/uploads/images/tin_tuc/lindan-vs-lee-chong-wei-top-5-tran-dau-dang-cap-cua-ky-phung-dich-thu-2.webp">
-</div>
-</div>
-</div>
-
-<!-- Slide 3 -->
-<div class="swiper-slide">
-<div class="slide-content">
-<div class="slide-text">
-<h2>Đồng Hành Cùng Người Chơi Cầu Lông</h2>
-<p>Tư vấn chọn vợt phù hợp – giao hàng nhanh toàn quốc.</p>
-<a href="/cua-hang">Khám phá ngay</a>
-</div>
-<div class="slide-image">
-<img src="https://www.badmintonplanet.com/wp-content/uploads/2016/05/05-13-2016-badminton-news-lee-chong-wei.jpg">
+<iframe 
+width="100%" 
+height="420"
+src="https://www.youtube.com/embed/-HowT-05GXY?autoplay=1&mute=1&loop=1&playlist=-HowT-05GXY"
+title="YouTube video player" 
+frameborder="0" 
+allow="autoplay; encrypted-media" 
+allowfullscreen>
+</iframe>
 </div>
 </div>
 </div>
