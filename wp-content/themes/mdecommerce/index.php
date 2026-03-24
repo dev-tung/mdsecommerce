@@ -79,7 +79,7 @@
     display:grid;
     grid-template-columns:1fr 1fr;
     align-items:center;
-    height:420px;
+    height:365px;
 }
 
 .slide-text h2{
@@ -108,7 +108,7 @@
 
 .slide-image img{
     width:100%;
-    height:420px;
+    height:365px;
     object-fit:cover;
 }
 
@@ -167,7 +167,7 @@
 <div class="slide-image">
 <iframe 
 width="100%" 
-height="420"
+height="365"
 src="https://www.youtube.com/embed/-HowT-05GXY?autoplay=1&mute=1&loop=1&playlist=-HowT-05GXY"
 title="YouTube video player" 
 frameborder="0" 
