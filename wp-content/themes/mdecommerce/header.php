@@ -220,6 +220,20 @@ margin-top:10px;
 
 <?php wp_head(); ?>
 
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Store",
+"name": "Mạnh Dũng Sports",
+"address": {
+"@type": "PostalAddress",
+"addressLocality": "Văn Giang",
+"addressRegion": "Hưng Yên",
+"addressCountry": "VN"
+}
+}
+</script>
+
 </head>
 
 <body <?php body_class(); ?>>
@@ -255,7 +269,7 @@ margin-top:10px;
 <div class="col-12 col-lg-3 logo-row">
 
 <a href="<?php echo home_url(); ?>" class="site-header__logo">
-<img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo.png" alt="Logo">
+<img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo.png" alt="Mạnh Dũng Sports - Shop cầu lông chính hãng Hưng Yên">
 </a>
 
 <div class="mobile-header-actions d-lg-none">
@@ -284,7 +298,7 @@ class="site-header__search">
 <input type="text"
 name="s"
 class="form-control site-header__search-input"
-placeholder="Giày 65Z4 VA..."
+placeholder="Tìm vợt cầu lông, giày Yonex..."
 value="<?php echo get_search_query(); ?>">
 
 <button class="btn site-header__search-btn">

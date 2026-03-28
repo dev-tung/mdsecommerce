@@ -143,6 +143,32 @@
     background:#69A84F;
 }
 
+.hero-title{
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.seo-box{
+    background:#f9fafb;
+    border:1px solid #e5e7eb;
+    padding:20px;
+    border-radius:8px;
+    line-height:1.6;
+}
+
+.seo-box h2{
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:10px;
+    color:#111827;
+}
+
+.seo-box p{
+    font-size:15px;
+    color:#4b5563;
+    margin:0;
+}
 </style>
 
 
@@ -159,22 +185,39 @@
 <!-- Slide 1 -->
 <div class="swiper-slide">
 <div class="slide-content">
+
 <div class="slide-text">
-<h2>Giày Yonex 65Z4 VA chính hãng</h2>
-<p>Độ bám sân tốt – êm – phù hợp đánh phong trào & thi đấu. Xem review thực tế bên cạnh.</p>
-<a href="https://zalo.me/0966628838">Inbox để tư vấn & nhận ưu đãi</a>
+
+<h1 class="hero-title">
+Shop cầu lông Hưng Yên – Vợt Yonex, Lining chính hãng giá tốt
+</h1>
+
+<h2 class="mb-2">
+Giày Yonex 65Z4 VA chính hãng
+</h2>
+
+<p>
+Độ bám sân tốt – êm – phù hợp đánh phong trào & thi đấu. Xem review thực tế bên cạnh.
+</p>
+
+<a href="https://zalo.me/0966628838" class="btn button-buy">
+Inbox để tư vấn & nhận ưu đãi
+</a>
+
 </div>
+
 <div class="slide-image">
 <iframe 
 width="100%" 
 height="365"
-src="https://www.youtube.com/embed/-HowT-05GXY?autoplay=1&mute=1&loop=1&playlist=-HowT-05GXY"
-title="YouTube video player" 
+src="https://www.youtube.com/embed/-HowT-05GXY"
+title="Review giày cầu lông Yonex 65Z4 VA"
 frameborder="0" 
-allow="autoplay; encrypted-media" 
+allow="encrypted-media" 
 allowfullscreen>
 </iframe>
 </div>
+
 </div>
 </div>
 
@@ -187,7 +230,6 @@ allowfullscreen>
 </div>
 
 </section>
-
 
 <?php
 
@@ -235,7 +277,7 @@ if ($query_sale->have_posts()) :
 
 <div class="container">
 
-<h4 class="fw-bold mb-4">Sản phẩm khuyến mãi</h4>
+<h2 class="fw-bold mb-4">Vợt cầu lông đang khuyến mãi</h2>
 
 <div class="swiper saleSwiper">
 
@@ -251,6 +293,12 @@ get_the_ID(),
 'woocommerce_thumbnail'
 ) ?: wc_placeholder_img_src();
 
+$terms = get_the_terms(get_the_ID(), 'product_cat');
+$category_name = 'Sản phẩm cầu lông';
+
+if ($terms && !is_wp_error($terms)) {
+    $category_name = $terms[0]->name;
+}
 ?>
 
 <div class="swiper-slide">
@@ -260,7 +308,7 @@ get_the_ID(),
 <img
 src="<?php echo esc_url($image_url); ?>"
 class="product-card__img"
-alt="<?php the_title(); ?>"
+alt="<?php echo $category_name . ' ' . get_the_title() . ' chính hãng giá tốt'; ?>"
 >
 
 <div class="card-body text-center d-flex flex-column p-2">
@@ -313,6 +361,23 @@ Xem thêm sản phẩm
 
 </section>
 
+<section class="container pb-5">
+
+<div class="seo-box">
+
+<h2>
+Shop cầu lông Yonex chính hãng tại Văn Giang, Ecopark Hưng Yên – Mạnh Dũng Sports
+</h2>
+
+<p>
+Chúng tôi chuyên cung cấp vợt cầu lông, giày cầu lông chính hãng từ Yonex, Lining với giá tốt.
+Hỗ trợ đan vợt lấy ngay, tư vấn chọn vợt phù hợp cho người mới và người chơi nâng cao.
+</p>
+
+</div>
+
+</section>
+
 <?php endif; wp_reset_postdata(); ?>
 
 
@@ -323,7 +388,7 @@ Xem thêm sản phẩm
 <script>
 
 new Swiper('.homeSwiper',{
-loop:true,
+loop:false,
 autoplay:{
 delay:3000,
 disableOnInteraction:false

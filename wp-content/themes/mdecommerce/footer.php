@@ -58,9 +58,9 @@
 
                 <div class="row gy-4">
 
-                    <div class="col-12 col-md-3">
+                    <div class="col-12 col-md-4">
                         <h5 class="footer-brand">Manh Dung Sports</h5>
-                        <a class="footer-desc d-block small text-decoration-none mb-2">Địa chỉ vòng xuyến Văn Giang Ecopark</a>
+                        <a class="footer-desc d-block small text-decoration-none mb-2">Địa chỉ vòng xuyến Văn Giang Ecopark - Hưng Yên</a>
                         <a class="footer-desc d-block small text-decoration-none mb-2">Mã số DN 0901190162</a>
                         <a class="footer-desc d-block small text-decoration-none mb-2">Người đại diện Đỗ Sơn Tùng</a>
                         <img
@@ -108,7 +108,7 @@
                         </a>
                     </div>
                     <!-- Google Map -->
-                    <div class="col-12 col-md-3">
+                    <div class="col-12 col-md-2">
                         <h6 class="footer-title">Bản đồ cửa hàng</h6>
 
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3726.1301894345106!2d105.93952307625392!3d20.947286290570084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135afcc68063b9f%3A0x5b21b9e15c97cfa!2zQ-G6p3UgbMO0bmcgTeG6oW5oIETFqW5nIChNRCBCQURNSU5UT04gU0hPUCk!5e0!3m2!1sen!2s!4v1768876714999!5m2!1sen!2s" width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
