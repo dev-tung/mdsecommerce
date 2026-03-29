@@ -216,6 +216,43 @@ margin-top:10px;
 
 }
 
+
+/* MENU ITEM CHA */
+.menu-item{
+position:relative;
+}
+
+/* SUBMENU */
+.submenu{
+position:absolute;
+top:100%;
+left:0;
+background:#fff;
+min-width:200px;
+display:none;
+flex-direction:column;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+border-radius:6px;
+padding:10px 0;
+z-index:999;
+}
+
+/* ITEM CON */
+.submenu a{
+color:#333;
+padding:10px 15px;
+text-decoration:none;
+display:block;
+}
+
+.submenu a:hover{
+background:#f2f4f7;
+}
+
+/* HOVER HIỆN MENU */
+.menu-item:hover > .submenu{
+display:flex;
+}
 </style>
 
 <?php wp_head(); ?>
@@ -342,11 +379,31 @@ Giỏ hàng
         'items_wrap' => '%3$s',
         'fallback_cb' => false,
         'walker' => new class extends Walker_Nav_Menu {
-            function start_el(&$output, $item, $depth=0, $args=null, $id=0) {
+
+            function start_lvl(&$output, $depth = 0, $args = null) {
+                $output .= '<div class="submenu">';
+            }
+
+            function end_lvl(&$output, $depth = 0, $args = null) {
+                $output .= '</div>';
+            }
+
+            function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+
+                $has_child = in_array('menu-item-has-children', $item->classes);
                 $active = in_array('current-menu-item', $item->classes) ? 'active' : '';
-                $output .= '<a href="'.$item->url.'" class="site-header__menu-item '.$active.'">';
+
+                $output .= '<div class="menu-item '.$active.' '.($has_child ? 'has-child' : '').'">';
+                $output .= '<a href="'.$item->url.'" class="site-header__menu-item">';
                 $output .= $item->title;
+                if($has_child){
+                    $output .= ' <i class="bi bi-chevron-down"></i>';
+                }
                 $output .= '</a>';
+            }
+
+            function end_el(&$output, $item, $depth = 0, $args = null) {
+                $output .= '</div>';
             }
         }
     ));
