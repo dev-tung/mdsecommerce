@@ -10,3 +10,10 @@ add_action('after_setup_theme', 'mdecommerce_setup');
 
 // Ẩn admin bar ngoài frontend
 add_filter('show_admin_bar', '__return_false');
+
+function theme_register_menus() {
+    register_nav_menus(array(
+        'main_menu' => 'Menu chính'
+    ));
+}
+add_action('after_setup_theme', 'theme_register_menus');

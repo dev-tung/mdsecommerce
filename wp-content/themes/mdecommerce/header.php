@@ -333,59 +333,25 @@ Giỏ hàng
 
 <div class="d-flex justify-content-between align-items-center">
 
-<div class="site-header__menu">
-
-<a href="<?php echo home_url('/danh-muc-san-pham/vot-cau-long'); ?>" 
-class="site-header__menu-item <?php if(is_product_category('vot-cau-long')) echo 'active'; ?>">
-Vợt cầu lông
-</a>
-
-<a href="<?php echo home_url('/danh-muc-san-pham/giay-cau-long'); ?>" 
-class="site-header__menu-item <?php if(is_product_category('giay-cau-long')) echo 'active'; ?>">
-Giày cầu lông
-</a>
-
-<a href="<?php echo home_url('/danh-muc-san-pham/ao-cau-long'); ?>" 
-class="site-header__menu-item <?php if(is_product_category('ao-cau-long')) echo 'active'; ?>">
-Áo cầu lông
-</a>
-
-<a href="<?php echo home_url('/danh-muc-san-pham/quan-cau-long'); ?>" 
-class="site-header__menu-item <?php if(is_product_category('quan-cau-long')) echo 'active'; ?>">
-Quần cầu lông
-</a>
-
-<a href="<?php echo home_url('/danh-muc-san-pham/bao-vot-cau-long'); ?>" 
-class="site-header__menu-item <?php if(is_product_category('bao-vot-cau-long')) echo 'active'; ?>">
-Bao vợt
-</a>
-
-<a href="<?php echo home_url('/danh-muc-san-pham/balo-vot-cau-long'); ?>" 
-class="site-header__menu-item <?php if(is_product_category('balo-vot-cau-long')) echo 'active'; ?>">
-Balo
-</a>
-
-<a href="<?php echo home_url('/danh-muc-san-pham/hop-cau-long'); ?>" 
-class="site-header__menu-item <?php if(is_product_category('hop-cau-long')) echo 'active'; ?>">
-Hộp cầu lông
-</a>
-
-<a href="<?php echo home_url('/string'); ?>" 
-class="site-header__menu-item <?php if(is_page('string')) echo 'active'; ?>">
-Dây căng
-</a>
-
-<a href="<?php echo home_url('/danh-muc-san-pham/phu-kien-cau-long'); ?>" 
-class="site-header__menu-item <?php if(is_product_category('phu-kien-cau-long')) echo 'active'; ?>">
-Phụ kiện khác
-</a>
-
-<a href="<?php echo home_url('/category/blog/'); ?>" 
-class="site-header__menu-item <?php if(is_category('blog')) echo 'active'; ?>">
-Tin tức
-</a>
-
-</div>
+  <div class="site-header__menu">
+    <?php
+    wp_nav_menu(array(
+        'theme_location' => 'main_menu',
+        'container' => false,
+        'menu_class' => '',
+        'items_wrap' => '%3$s',
+        'fallback_cb' => false,
+        'walker' => new class extends Walker_Nav_Menu {
+            function start_el(&$output, $item, $depth=0, $args=null, $id=0) {
+                $active = in_array('current-menu-item', $item->classes) ? 'active' : '';
+                $output .= '<a href="'.$item->url.'" class="site-header__menu-item '.$active.'">';
+                $output .= $item->title;
+                $output .= '</a>';
+            }
+        }
+    ));
+    ?>
+  </div>
 
 </div>
 
