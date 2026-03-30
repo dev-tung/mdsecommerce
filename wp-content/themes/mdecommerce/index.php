@@ -189,7 +189,7 @@
 <div class="slide-text">
 
 <h1 class="hero-title">
-Shop cầu lông Hưng Yên – Vợt Yonex, Lining chính hãng giá tốt
+Shop cầu lông – Vợt Yonex, Lining chính hãng giá tốt
 </h1>
 
 <h2 class="mb-2">
