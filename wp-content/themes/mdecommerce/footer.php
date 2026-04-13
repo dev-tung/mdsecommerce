@@ -99,11 +99,11 @@
                             Zalo
                         </a>
 
-                        <a href="https://www.tiktok.com/@manhdungsports.com" target="_blank" class="footer-link d-block small mb-2">
+                        <a href="https://www.tiktok.com/@badmintontung" target="_blank" class="footer-link d-block small mb-2">
                             TikTok
                         </a>
 
-                        <a href="https://www.youtube.com/@manhdungsports" target="_blank" class="footer-link d-block small">
+                        <a href="https://www.youtube.com/@tungbadminton" target="_blank" class="footer-link d-block small">
                             YouTube
                         </a>
                     </div>
