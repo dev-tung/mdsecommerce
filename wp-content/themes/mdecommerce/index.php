@@ -347,7 +347,7 @@ Xem chi tiết
 
 <div class="text-center mt-4">
 
-<a href="<?php echo home_url('/cua-hang'); ?>" class="btn button-buy">
+<a href="<?php echo home_url('/danh-muc-san-pham/vot-cau-long/'); ?>" class="btn button-buy">
 
 Xem thêm sản phẩm
 
