@@ -1,6 +1,7 @@
 <style>
   .Header__SearchWrap {
     position: relative;
+    width: 415px;
   }
 
   .Header__Search {
@@ -29,15 +30,47 @@
   /* ===== DROPDOWN ===== */
   .Header__SearchDropdown {
     position: absolute;
-    top: 110%;
+    top: calc(100% + 10px);
     left: 0;
     right: 0;
+
     background: #fff;
     border-radius: 10px;
+
     box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+
     padding: 10px;
     display: none;
+
     z-index: 1000;
+  }
+
+  /* TAM GIÁC CHỔNG LÊN */
+  .Header__SearchDropdown::before {
+    content: "";
+
+    position: absolute;
+    top: -8px;
+    left: 24px;
+
+    width: 0;
+    height: 0;
+
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #fff;
+  }
+
+  /* GIỮ HOVER / CLICK MƯỢT */
+  .Header__SearchWrap::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    top: 100%;
+
+    width: 100%;
+    height: 12px;
   }
 
   .Header__SearchWrap.active .Header__SearchDropdown {

@@ -14,6 +14,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: #000;
+    text-decoration: none;
   }
 
   .Header__Action i {
@@ -28,7 +30,7 @@
       <!-- LOGO -->
       <div class="col-2">
         <a href="#" class="Header__Logo text-dark text-decoration-none">
-          MD Sport
+          <img src="../../assets/images/logo.png" width="140" alt="Logo">
         </a>
       </div>
 
@@ -38,22 +40,25 @@
       </div>
 
       <!-- ACTION -->
-      <div class="col-4 d-flex justify-content-end gap-3">
+      <div class="col-4 d-flex justify-content-end gap-4">
 
-        <div class="Header__Action">
-          <i class="bi bi-telephone"></i>
-          <span>Gọi mua</span>
-        </div>
+        <!-- LOGIN -->
+        <a href="#" class="Header__Action">
+          <i class="bi bi-person"></i>
+          <span>Đăng nhập</span>
+        </a>
 
-        <div class="Header__Action">
-          <i class="bi bi-geo-alt"></i>
-          <span>Cửa hàng</span>
-        </div>
-
-        <div class="Header__Action fw-bold">
+        <!-- CART -->
+        <a href="#" class="Header__Action">
           <i class="bi bi-cart"></i>
           <span>Giỏ hàng</span>
-        </div>
+        </a>
+
+        <!-- STORE -->
+        <a href="#" class="Header__Action">
+          <i class="bi bi-geo-alt"></i>
+          <span>Cửa hàng</span>
+        </a>
 
       </div>
 

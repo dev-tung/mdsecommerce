@@ -9,7 +9,6 @@
     padding: 8px 0;
     margin: 0;
     list-style: none;
-    overflow-x: visible;
   }
 
   .Menu__Item {
@@ -19,69 +18,129 @@
 
   .Menu__Link {
     text-decoration: none;
-    color: black;
+    color: #000;
     font-size: 14px;
-    padding: 6px 8px;
+    padding: 8px 10px;
     border-radius: 4px;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    transition: 0.2s;
+    margin-left: -10px;
   }
 
   .Menu__Link:hover {
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.08);
   }
 
-  /* ICON */
+  /* ICON MŨI TÊN */
   .Menu__Link--Dropdown::after {
     content: "";
     display: inline-block;
-    margin-left: 6px;
 
-    border: solid black;
-    border-width: 0 1.5px 1.5px 0;
-    padding: 3px;
+    width: 6px;
+    height: 6px;
+
+    margin-left: 8px;
+    margin-top: -1px;
+
+    border-right: 1.5px solid #000;
+    border-bottom: 1.5px solid #000;
 
     transform: rotate(45deg);
-    transition: 0.2s;
+    transform-origin: center;
+
+    transition: transform .25s ease;
   }
 
+  /* HOVER -> QUAY LÊN */
   .Menu__Item:hover .Menu__Link--Dropdown::after {
-    transform: rotate(225deg);
+    transform: rotate(-135deg);
+    margin-top: 3px;
   }
-
-  .dropdown-toggle::after {
-    display: none;
-  }
-
+  
   /* DROPDOWN */
   .dropdown-menu {
-    border-radius: 6px;
-    border: none;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+
     min-width: 180px;
+
+    background: #fff;
+    border-radius: 8px;
+
+    padding: 10px 0 6px;
+    margin-top: 8px;
+
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+
+  /* TAM GIÁC CHỔNG LÊN */
+  .dropdown-menu::before {
+    content: "";
+
+    position: absolute;
+    top: -8px;
+    left: 20px;
+
+    width: 0;
+    height: 0;
+
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #fff;
+  }
+
+  /* GIỮ HOVER */
+  .Menu__Item::after {
+    content: "";
+    position: absolute;
+
+    left: 0;
+    top: 100%;
+
+    width: 100%;
+    height: 12px;
+  }
+
+  .Menu__Item:hover .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-item {
+    display: block;
+    padding: 10px 14px;
+
+    color: #000;
+    text-decoration: none;
+    font-size: 14px;
   }
 
   .dropdown-item:hover {
     background-color: #f5f5f5;
   }
-
-  .Menu .dropdown:hover > .dropdown-menu {
-    display: block;
-  }
 </style>
 
 <nav class="Menu">
   <div class="container">
+
     <ul class="Menu__List">
 
-      <li class="Menu__Item dropdown">
-        <a href="#" class="Menu__Link Menu__Link--Dropdown dropdown-toggle" data-bs-toggle="dropdown">
+      <!-- DROPDOWN -->
+      <li class="Menu__Item">
+
+        <a href="#" class="Menu__Link Menu__Link--Dropdown">
           Vợt cầu lông
         </a>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Yonex</a></li>
-          <li><a class="dropdown-item" href="#">Lining</a></li>
-          <li><a class="dropdown-item" href="#">Victor</a></li>
-        </ul>
+
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item">Yonex</a>
+          <a href="#" class="dropdown-item">Lining</a>
+          <a href="#" class="dropdown-item">Victor</a>
+        </div>
+
       </li>
 
       <li class="Menu__Item">
@@ -109,5 +168,6 @@
       </li>
 
     </ul>
+
   </div>
 </nav>
